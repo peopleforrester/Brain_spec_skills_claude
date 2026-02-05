@@ -1,39 +1,36 @@
-# Brain Spec MCP Server — Development Guide
+# Brain Spec Skills — Development Guide
 
-## Stack
-- TypeScript 5.x, Node.js 20+, ESM modules
-- MCP SDK: @modelcontextprotocol/sdk
-- Build: tsup, Test: vitest, Lint: eslint + prettier
-- Dashboard: Express + vanilla HTML/JS
+## Overview
+Brain Spec provides spec-driven development via 4 Claude Code slash commands.
+No build step, no npm dependencies — just markdown skill files.
 
-## Commands
-- `npm test` — Run all tests
-- `npm run build` — Build with tsup
-- `npm run dev` — Build with watch mode
-- `npm run lint` — Lint all source and test files
-- `npm run format` — Format with prettier
-- `npm run typecheck` — TypeScript type checking
+## Skills
+- `/brain-init` — Initialize `.brain-spec/` workspace, steering docs, CLAUDE.md generation
+- `/brain-spec` — Spec lifecycle: create, interview, list, get, update, delete, archive
+- `/brain-task` — Task management: create, update, list, log, progress
+- `/brain-status` — Quick dashboard overview (runs in fork context)
 
 ## Key Directories
-- `src/modules/spec-workflow/` — Spec CRUD, interview engine, task management
-- `src/modules/config-engine/` — CLAUDE.md generation, agents, skills, hooks, rules
-- `src/modules/learning/` — Pattern extraction, analytics, context management
-- `src/modules/dashboard/` — Express polling dashboard
-- `src/utils/` — File system, markdown, git, validation utilities
-- `src/templates/` — All built-in templates (read-only)
-- `skills/` — Bundled slash command .md files
-- `tests/` — Unit, integration, E2E tests
+- `.claude/skills/brain-init/` — Project setup skill
+- `.claude/skills/brain-spec/` — Spec lifecycle skill
+- `.claude/skills/brain-task/` — Task management skill
+- `.claude/skills/brain-status/` — Dashboard skill
+- `SPEC.md` — Reference specification
 
-## Code Standards
-- All files start with 2-line ABOUTME comments
-- Use zod for runtime validation of tool inputs
-- Every tool returns `{ success: boolean, data?: any, error?: string }`
-- All tools prefixed with `brain_`
+## Data Directory Convention
+Skills operate on `.brain-spec/` in the target project:
+```
+.brain-spec/
+  config.json
+  specs/{slug}.md + {slug}.meta.json
+  tasks/{slug}/tasks.json + logs/{id}.log.md
+  steering/{product,tech,structure}.md
+  archive/{slug}/archive-metadata.json
+```
+
+## Design Principles
+- Zero startup cost — skills loaded only when invoked
+- All schemas and templates embedded in SKILL.md files
 - Write access constrained to `.brain-spec/` and `CLAUDE.md` only
-- Git operations are read-only (never commit/push/modify)
-
-## Gotchas
-- MCP server uses stdio transport for normal operation
-- Dashboard is a separate Express process (--dashboard flag)
+- Git operations are read-only (auto-enrichment for logs)
 - Interview state persists in .meta.json, resumable across sessions
-- Templates in src/templates/ are bundled as package data files

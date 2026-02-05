@@ -1,13 +1,22 @@
-node_modules/
-dist/
-*.tsbuildinfo
-coverage/
-.env
-.env.*
-*.log
+# OS
 .DS_Store
 Thumbs.db
+
+# Editor
 .vscode/
 .idea/
 *.swp
 *.swo
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
+# Node (legacy, no longer used)
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
