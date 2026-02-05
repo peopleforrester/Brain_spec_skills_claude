@@ -1,4 +1,9 @@
+<!-- ABOUTME: Development guide for Brain Spec Skills contributors. -->
+<!-- ABOUTME: For user documentation, see README.md and docs/. -->
+
 # Brain Spec Skills — Development Guide
+
+> This file is for contributors. For user documentation, see [README.md](README.md).
 
 ## Overview
 Brain Spec provides spec-driven development via 4 Claude Code slash commands.

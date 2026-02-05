@@ -14,37 +14,41 @@ No arguments. Reads workspace state and displays a summary.
 
 ## Instructions
 
-### Step 1: Verify Workspace
+### Step 1: Read Version
+
+Use Glob to check for a VERSION file in `.claude/skills/brain-status/VERSION` or `.claude/skills/brain-init/VERSION`. If found, read it and store the version string for the dashboard header. If not found, use "dev" as the version.
+
+### Step 2: Verify Workspace
 
 Check if `.brain-spec/config.json` exists using Glob.
 
 - If not found, display: "No Brain Spec workspace found. Run `/brain-init` to set up."
 - If found, proceed.
 
-### Step 2: Check Steering Documents
+### Step 3: Check Steering Documents
 
 Check for the existence of each steering document:
 - `.brain-spec/steering/product.md`
 - `.brain-spec/steering/tech.md`
 - `.brain-spec/steering/structure.md`
 
-### Step 3: List Active Specs
+### Step 4: List Active Specs
 
 Use Glob to find all `.brain-spec/specs/*.meta.json` files. Read each one.
 
 For each spec, also read `.brain-spec/tasks/{slug}/tasks.json` if it exists to get task counts.
 
-### Step 4: List Archived Specs
+### Step 5: List Archived Specs
 
 Use Glob to find all `.brain-spec/archive/*/archive-metadata.json` files. Read each one.
 
-### Step 5: Display Dashboard
+### Step 6: Display Dashboard
 
 Format the output as follows:
 
 ```
 ╔══════════════════════════════════════╗
-║         Brain Spec Dashboard         ║
+║    Brain Spec Dashboard v{version}   ║
 ╚══════════════════════════════════════╝
 
 Steering Documents
