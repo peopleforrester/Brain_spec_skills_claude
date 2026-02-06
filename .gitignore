@@ -12,6 +12,9 @@ Thumbs.db
 .env
 .env.*
 
+# Brain Spec workspace (local development data)
+.brain-spec/
+
 # Logs
 *.log
 

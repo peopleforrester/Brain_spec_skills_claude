@@ -1,9 +1,0 @@
-{
-  "specSlug": "brain-spec-skills",
-  "name": "Brain Spec Skills for Claude Code",
-  "description": "Spec-driven development via 4 Claude Code slash commands replacing a 20-tool MCP server",
-  "status": "active",
-  "interview": null,
-  "createdAt": "2026-02-05T14:00:00.000Z",
-  "updatedAt": "2026-02-05T18:55:00.000Z"
-}
