@@ -21,5 +21,6 @@ Thumbs.db
 # Node (legacy, no longer used)
 node_modules/
 dist/
+build/
 *.tsbuildinfo
 coverage/
