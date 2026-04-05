@@ -6,7 +6,7 @@ set -euo pipefail
 
 REPO_URL="https://github.com/peopleforrester/Brain_spec_skills_claude.git"
 SKILLS=("brain-init" "brain-spec" "brain-task" "brain-status")
-TMPDIR=""
+CLONE_DIR=""
 
 # --- Parse arguments ---
 GLOBAL=false
@@ -39,8 +39,8 @@ done
 
 # --- Cleanup on exit ---
 cleanup() {
-  if [[ -n "$TMPDIR" && -d "$TMPDIR" ]]; then
-    rm -rf "$TMPDIR"
+  if [[ -n "$CLONE_DIR" && -d "$CLONE_DIR" ]]; then
+    rm -rf "$CLONE_DIR"
   fi
 }
 trap cleanup EXIT
@@ -69,14 +69,14 @@ for skill in "${SKILLS[@]}"; do
 done
 
 # --- Clone repo to temp directory ---
-TMPDIR=$(mktemp -d)
+CLONE_DIR=$(mktemp -d)
 echo "Fetching latest skills..."
-git clone --depth 1 --quiet "$REPO_URL" "$TMPDIR"
+git clone --depth 1 --quiet "$REPO_URL" "$CLONE_DIR"
 
 # --- Read version ---
 NEW_VERSION="unknown"
-if [[ -f "$TMPDIR/VERSION" ]]; then
-  NEW_VERSION=$(cat "$TMPDIR/VERSION" | tr -d '[:space:]')
+if [[ -f "$CLONE_DIR/VERSION" ]]; then
+  NEW_VERSION=$(cat "$CLONE_DIR/VERSION" | tr -d '[:space:]')
 fi
 
 # --- Create target directory ---
@@ -85,7 +85,7 @@ mkdir -p "$TARGET_DIR"
 # --- Copy skills ---
 INSTALLED=0
 for skill in "${SKILLS[@]}"; do
-  SRC="$TMPDIR/.claude/skills/$skill"
+  SRC="$CLONE_DIR/.claude/skills/$skill"
   DEST="$TARGET_DIR/$skill"
 
   if [[ ! -d "$SRC" ]]; then
