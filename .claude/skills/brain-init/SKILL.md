@@ -2,6 +2,8 @@
 name: brain-init
 description: Initialize a .brain-spec/ workspace with directory tree, config, steering documents, and optional CLAUDE.md generation.
 ---
+<!-- ABOUTME: Skill instructions for /brain-init slash command. -->
+<!-- ABOUTME: Creates .brain-spec/ workspace, config, steering docs, and optional project CLAUDE.md. -->
 
 # Brain Init — Project Setup
 
@@ -48,10 +50,6 @@ Write `.brain-spec/config.json` with this content:
     "tasks": ".brain-spec/tasks",
     "steering": ".brain-spec/steering",
     "archive": ".brain-spec/archive"
-  },
-  "defaults": {
-    "maxTasksPerSpec": 50,
-    "staleThresholdDays": 30
   }
 }
 ```

@@ -55,10 +55,6 @@ Created by `/brain-init`. Stores workspace paths and defaults.
     "tasks": ".brain-spec/tasks",
     "steering": ".brain-spec/steering",
     "archive": ".brain-spec/archive"
-  },
-  "defaults": {
-    "maxTasksPerSpec": 50,
-    "staleThresholdDays": 30
   }
 }
 ```

@@ -2,6 +2,8 @@
 name: brain-task
 description: Task management — create, update, list, log, and track progress for spec implementation tasks.
 ---
+<!-- ABOUTME: Skill instructions for /brain-task slash command. -->
+<!-- ABOUTME: Manages implementation tasks: create, update, list, log, and progress tracking. -->
 
 # Brain Task — Task Management
 

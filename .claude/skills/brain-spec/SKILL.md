@@ -2,6 +2,8 @@
 name: brain-spec
 description: Spec lifecycle management — create, interview, list, get, update, delete, and archive feature specifications.
 ---
+<!-- ABOUTME: Skill instructions for /brain-spec slash command. -->
+<!-- ABOUTME: Manages spec lifecycle: create, interview, list, get, update, delete, archive. -->
 
 # Brain Spec — Spec Lifecycle Management
 
