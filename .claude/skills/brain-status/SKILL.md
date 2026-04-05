@@ -2,6 +2,7 @@
 name: brain-status
 description: Display a quick overview of the Brain Spec workspace with steering doc status, specs, tasks, and progress.
 context: fork
+allowed-tools: Glob Read Grep Bash
 ---
 <!-- ABOUTME: Skill instructions for /brain-status slash command. -->
 <!-- ABOUTME: Displays workspace dashboard with steering docs, specs, tasks, and progress bars. -->

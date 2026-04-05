@@ -1,6 +1,7 @@
 ---
 name: brain-init
 description: Initialize a .brain-spec/ workspace with directory tree, config, steering documents, and optional CLAUDE.md generation.
+allowed-tools: Glob Read Write Bash
 ---
 <!-- ABOUTME: Skill instructions for /brain-init slash command. -->
 <!-- ABOUTME: Creates .brain-spec/ workspace, config, steering docs, and optional project CLAUDE.md. -->
