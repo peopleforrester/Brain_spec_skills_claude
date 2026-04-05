@@ -1,8 +1,12 @@
+---
+name: brain-status
+description: Display a quick overview of the Brain Spec workspace with steering doc status, specs, tasks, and progress.
+context: fork
+---
+
 # Brain Status — Workspace Dashboard
 
 Display a quick overview of the Brain Spec workspace: steering doc status, all specs with progress, archived specs, and overall statistics.
-
-context: fork
 
 ## Usage
 

@@ -1,3 +1,8 @@
+---
+name: brain-spec
+description: Spec lifecycle management — create, interview, list, get, update, delete, and archive feature specifications.
+---
+
 # Brain Spec — Spec Lifecycle Management
 
 Create, interview, view, update, delete, and archive feature specifications stored in `.brain-spec/specs/`.
@@ -200,7 +205,7 @@ TODO: Define data models and relationships
 1. Verify `.brain-spec/specs/` directory exists. If not, tell the user to run `/brain-init` first.
 2. Generate the slug from the name (everything after "create ").
 3. Check if `.brain-spec/specs/{slug}.meta.json` already exists. If so, error with "Spec '{slug}' already exists."
-4. Ask the user via AskUserQuestion: "How do you want to create this spec?"
+4. Ask the user: "How do you want to create this spec?"
    - **Interview** (recommended) — Guided Q&A that builds the spec interactively
    - **Blank template** — Creates a spec with TODO placeholders to fill in manually
 5. If **Blank template**: Write `{slug}.meta.json` and `{slug}.md` using the templates above, with status "draft". Display the file path and suggest next steps.
@@ -281,7 +286,7 @@ If no specs exist, display: "No specs found. Create one with `/brain-spec create
 **Usage**: `/brain-spec update my-feature-name`
 
 1. Read `.brain-spec/specs/{slug}.meta.json`. If not found, error.
-2. Ask the user what they want to update via AskUserQuestion:
+2. Ask the user what they want to update. Present these choices and wait for their response:
    - **Status** — Change spec status (draft/active/completed)
    - **Content** — Edit the spec markdown
    - **Description** — Update the spec description
@@ -308,7 +313,7 @@ If no specs exist, display: "No specs found. Create one with `/brain-spec create
 
 1. Read `.brain-spec/specs/{slug}.meta.json`. If not found, error.
 2. Ask the user for:
-   - **Reason**: completed / deprecated / superseded (via AskUserQuestion)
+   - **Reason**: completed / deprecated / superseded (ask the user to choose)
    - **Summary**: Brief summary of what was accomplished
    - If superseded: **Superseded by**: slug of the replacement spec
 3. Count tasks from `.brain-spec/tasks/{slug}/tasks.json` if it exists.

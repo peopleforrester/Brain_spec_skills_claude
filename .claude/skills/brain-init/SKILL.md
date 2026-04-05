@@ -1,3 +1,8 @@
+---
+name: brain-init
+description: Initialize a .brain-spec/ workspace with directory tree, config, steering documents, and optional CLAUDE.md generation.
+---
+
 # Brain Init — Project Setup
 
 Initialize a `.brain-spec/` workspace in the current project. Creates the directory tree, config file, steering documents, and optionally generates a CLAUDE.md.
@@ -53,7 +58,7 @@ Write `.brain-spec/config.json` with this content:
 
 ### Step 4: Create Steering Documents
 
-Ask the user about each steering document using AskUserQuestion. For each one (product, tech, structure), ask if they want to:
+Ask the user about each steering document. For each one (product, tech, structure), present these choices and wait for their response:
 1. Create it now with guided content
 2. Create it with the template (to fill in later)
 3. Skip it for now
@@ -135,7 +140,7 @@ Ask the user if they want to generate a CLAUDE.md file. If yes:
    - `Cargo.toml` → Rust
    - `tsconfig.json` → TypeScript specifically
 
-2. Ask which template to use via AskUserQuestion. Available templates:
+2. Ask the user which template to use. Present the following options and wait for their response:
 
    - **minimal** — Just build/test/lint commands and basic style notes
    - **standard** — Overview, tech stack, commands, style guide, testing, git workflow

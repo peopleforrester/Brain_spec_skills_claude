@@ -1,3 +1,8 @@
+---
+name: brain-task
+description: Task management — create, update, list, log, and track progress for spec implementation tasks.
+---
+
 # Brain Task — Task Management
 
 Create, update, list, and log implementation tasks for specs stored in `.brain-spec/tasks/`.
@@ -125,7 +130,7 @@ Only include sections that have content. Omit empty sections.
 5. Parse the title (text after the slug, optionally in quotes).
 6. Parse `--parent <id>` if present.
 7. Generate the task ID using the ID generation algorithm.
-8. Ask the user for optional details via AskUserQuestion:
+8. Ask the user for optional details:
    - Description (or skip)
    - Acceptance criteria (or skip)
 9. Create the task object with defaults:
@@ -148,7 +153,7 @@ Only include sections that have content. Omit empty sections.
    - `--status <pending|in-progress|completed>`: Update status. If set to "completed", also set progress to 100.
    - `--progress <0-100>`: Update progress percentage.
    - `--notes <text>`: Append to notes.
-4. If no flags provided, show current task details and ask what to update via AskUserQuestion.
+4. If no flags provided, show current task details and ask the user what they want to update.
 5. Update `updatedAt` timestamp.
 6. Save `tasks.json`.
 7. Display updated task summary.
