@@ -161,13 +161,13 @@ Output:
 
 ```
 ID    Title                        Status        Progress
-----  ---------------------------  ------------  --------
-1     Implement login endpoint     in-progress   ████░░░░ 50%
-1.1   Add email validation         completed     ████████ 100%
-1.2   Add password hashing         pending       ░░░░░░░░ 0%
-1.3   Add JWT token generation     pending       ░░░░░░░░ 0%
-2     Implement session management pending       ░░░░░░░░ 0%
-3     Write integration tests      pending       ░░░░░░░░ 0%
+────  ───────────────────────────  ────────────  ──────────────────
+1     Implement login endpoint     in-progress   ━━━━━━━━━─────────  50%
+1.1   Add email validation         completed     ━━━━━━━━━━━━━━━━━━ 100%
+1.2   Add password hashing         pending       ──────────────────   0%
+1.3   Add JWT token generation     pending       ──────────────────   0%
+2     Implement session management pending       ──────────────────   0%
+3     Write integration tests      pending       ──────────────────   0%
 
 2/6 tasks completed (33%)
 ```
@@ -205,9 +205,9 @@ Get an overview of everything:
 Output:
 
 ```
-+======================================+
-|       Brain Spec Dashboard v1.0.0     |
-+======================================+
+╔══════════════════════════════════════╗
+║    Brain Spec Dashboard v1.0.0       ║
+╚══════════════════════════════════════╝
 
 Steering Documents
   product.md    ✓ exists
@@ -216,7 +216,7 @@ Steering Documents
 
 Active Specs
   Slug                 Status      Progress
-  -------------------  ----------  ------------------
+  ─────────────────  ──────────  ──────────────────
   user-authentication  active      ━━━━━━━━━━━━────── 33% (2/6)
 
 Archived Specs
@@ -242,6 +242,6 @@ You'll be asked for a reason (completed/deprecated/superseded) and a brief summa
 
 ## What's Next?
 
-- Read the [Skills Reference](SKILLS-REFERENCE.md) for all subcommands and options
-- Read the [Architecture Guide](ARCHITECTURE.md) to understand the data model
-- Read the [Plugin Guide](PLUGIN-GUIDE.md) to learn about team sharing and customization
+- Read the [Skills Reference](./SKILLS-REFERENCE.md) for all subcommands and options
+- Read the [Architecture Guide](./ARCHITECTURE.md) to understand the data model
+- Read the [Plugin Guide](./PLUGIN-GUIDE.md) to learn about team sharing and customization

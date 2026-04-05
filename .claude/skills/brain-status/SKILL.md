@@ -83,7 +83,7 @@ If there are no specs, show: "No specs yet. Create one with `/brain-spec create 
 
 If there are no archived specs, show: "No archived specs."
 
-Progress bar: 18 characters wide. Use `━` for filled, `──` segments for empty.
+Progress bar: 18 characters wide. Use `━` for filled and `─` for empty. Calculate fill: `round(progress / 100 * 18)`.
 
 ### Notes on Fork Context
 

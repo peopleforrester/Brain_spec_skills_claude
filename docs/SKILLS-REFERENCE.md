@@ -216,16 +216,16 @@ List tasks for a spec.
 **Output:**
 ```
 ID    Title                    Status        Progress
-----  -----------------------  ------------  --------
-1     Implement login form     in-progress   ████░░░░ 50%
-1.1   Add email validation     completed     ████████ 100%
-1.2   Add password rules       pending       ░░░░░░░░ 0%
-2     Design API endpoints     pending       ░░░░░░░░ 0%
+────  ───────────────────────  ────────────  ──────────────────
+1     Implement login form     in-progress   ━━━━━━━━━─────────  50%
+1.1   Add email validation     completed     ━━━━━━━━━━━━━━━━━━ 100%
+1.2   Add password rules       pending       ──────────────────   0%
+2     Design API endpoints     pending       ──────────────────   0%
 
 1/4 tasks completed (25%)
 ```
 
-Subtasks are indented. Progress bars are 8 characters wide.
+Subtasks are indented. Progress bars are 18 characters wide.
 
 ### /brain-task log \<slug\> \<id\>
 
@@ -297,9 +297,9 @@ No arguments. Runs in a fork context (isolated from your main conversation) to k
 
 **Output:**
 ```
-+======================================+
-|     Brain Spec Dashboard v1.0.0       |
-+======================================+
+╔══════════════════════════════════════╗
+║    Brain Spec Dashboard v1.0.0       ║
+╚══════════════════════════════════════╝
 
 Steering Documents
   product.md    ✓ exists
@@ -308,13 +308,13 @@ Steering Documents
 
 Active Specs
   Slug                 Status      Progress
-  -------------------  ----------  ------------------
+  ─────────────────  ──────────  ──────────────────
   user-auth-flow       active      ━━━━━━━━━━━━────── 60% (3/5)
   api-redesign         draft       ────────────────── 0% (0/0)
 
 Archived Specs
   Slug                 Reason       Archived
-  -------------------  -----------  ----------
+  ─────────────────  ───────────  ──────────
   old-feature          completed    2025-01-10
 
 Overall Statistics

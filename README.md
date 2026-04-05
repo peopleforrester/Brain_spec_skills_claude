@@ -102,7 +102,7 @@ To update, re-run the install command.
 - [Architecture](docs/ARCHITECTURE.md) -- Data model, design decisions, security
 - [Plugin Guide](docs/PLUGIN-GUIDE.md) -- Install modes, team sharing, extending
 - [Changelog](CHANGELOG.md) -- Release history
-- [Legacy MCP Server Spec](SPEC.md) -- Reference only; the project pivoted to skills
+- [Legacy MCP Server Spec](docs/legacy/SPEC.md) -- Reference only; the project pivoted to skills
 
 ## Data Directory
 

@@ -168,14 +168,14 @@ Only include sections that have content. Omit empty sections.
 
 ```
 ID    Title                    Status        Progress
-────  ───────────────────────  ────────────  ────────
-1     Implement login form     in-progress   ████░░░░ 50%
-1.1   Add email validation     completed     ████████ 100%
-1.2   Add password rules       pending       ░░░░░░░░ 0%
-2     Design API endpoints     pending       ░░░░░░░░ 0%
+────  ───────────────────────  ────────────  ──────────────────
+1     Implement login form     in-progress   ━━━━━━━━━─────────  50%
+1.1   Add email validation     completed     ━━━━━━━━━━━━━━━━━━ 100%
+1.2   Add password rules       pending       ──────────────────   0%
+2     Design API endpoints     pending       ──────────────────   0%
 ```
 
-Progress bar: Use `█` for filled and `░` for empty, 8 characters wide. Calculate fill: `round(progress / 100 * 8)`.
+Progress bar: Use `━` for filled and `─` for empty, 18 characters wide. Calculate fill: `round(progress / 100 * 18)`.
 
 Subtasks (IDs containing ".") should be indented with 2 spaces.
 
