@@ -1,8 +1,14 @@
+---
+name: brain-status
+description: Display a quick overview of the Brain Spec workspace with steering doc status, specs, tasks, and progress.
+context: fork
+---
+<!-- ABOUTME: Skill instructions for /brain-status slash command. -->
+<!-- ABOUTME: Displays workspace dashboard with steering docs, specs, tasks, and progress bars. -->
+
 # Brain Status — Workspace Dashboard
 
 Display a quick overview of the Brain Spec workspace: steering doc status, all specs with progress, archived specs, and overall statistics.
-
-context: fork
 
 ## Usage
 
@@ -79,7 +85,7 @@ If there are no specs, show: "No specs yet. Create one with `/brain-spec create 
 
 If there are no archived specs, show: "No archived specs."
 
-Progress bar: 18 characters wide. Use `━` for filled, `──` segments for empty.
+Progress bar: 18 characters wide. Use `━` for filled and `─` for empty. Calculate fill: `round(progress / 100 * 18)`.
 
 ### Notes on Fork Context
 

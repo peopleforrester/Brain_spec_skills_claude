@@ -57,6 +57,15 @@ ls .claude/skills/brain-*/SKILL.md
 # Should list 4 files
 ```
 
+### Verify Checksums
+
+For security-conscious installs, verify file integrity against published checksums:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/peopleforrester/Brain_spec_skills_claude/main/checksums.txt -o /tmp/brain-spec-checksums.txt
+sha256sum -c /tmp/brain-spec-checksums.txt --ignore-missing
+```
+
 ## Quick Start
 
 1. Open Claude Code in your project
@@ -93,7 +102,7 @@ To update, re-run the install command.
 - [Architecture](docs/ARCHITECTURE.md) -- Data model, design decisions, security
 - [Plugin Guide](docs/PLUGIN-GUIDE.md) -- Install modes, team sharing, extending
 - [Changelog](CHANGELOG.md) -- Release history
-- [Legacy MCP Server Spec](SPEC.md) -- Reference only; the project pivoted to skills
+- [Legacy MCP Server Spec](docs/legacy/SPEC.md) -- Reference only; the project pivoted to skills
 
 ## Data Directory
 

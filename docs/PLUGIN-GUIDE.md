@@ -164,7 +164,7 @@ Describe what Claude should do. Reference Claude Code tools:
 - Use Write to create files
 - Use Edit to modify files
 - Use Bash for shell commands
-- Use AskUserQuestion for interactive prompts
+- Ask the user questions and wait for their response for interactive prompts
 
 ### Step 2: Do Something Else
 

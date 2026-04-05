@@ -1,3 +1,10 @@
+---
+name: brain-task
+description: Task management — create, update, list, log, and track progress for spec implementation tasks.
+---
+<!-- ABOUTME: Skill instructions for /brain-task slash command. -->
+<!-- ABOUTME: Manages implementation tasks: create, update, list, log, and progress tracking. -->
+
 # Brain Task — Task Management
 
 Create, update, list, and log implementation tasks for specs stored in `.brain-spec/tasks/`.
@@ -125,7 +132,7 @@ Only include sections that have content. Omit empty sections.
 5. Parse the title (text after the slug, optionally in quotes).
 6. Parse `--parent <id>` if present.
 7. Generate the task ID using the ID generation algorithm.
-8. Ask the user for optional details via AskUserQuestion:
+8. Ask the user for optional details:
    - Description (or skip)
    - Acceptance criteria (or skip)
 9. Create the task object with defaults:
@@ -148,7 +155,7 @@ Only include sections that have content. Omit empty sections.
    - `--status <pending|in-progress|completed>`: Update status. If set to "completed", also set progress to 100.
    - `--progress <0-100>`: Update progress percentage.
    - `--notes <text>`: Append to notes.
-4. If no flags provided, show current task details and ask what to update via AskUserQuestion.
+4. If no flags provided, show current task details and ask the user what they want to update.
 5. Update `updatedAt` timestamp.
 6. Save `tasks.json`.
 7. Display updated task summary.
@@ -163,14 +170,14 @@ Only include sections that have content. Omit empty sections.
 
 ```
 ID    Title                    Status        Progress
-────  ───────────────────────  ────────────  ────────
-1     Implement login form     in-progress   ████░░░░ 50%
-1.1   Add email validation     completed     ████████ 100%
-1.2   Add password rules       pending       ░░░░░░░░ 0%
-2     Design API endpoints     pending       ░░░░░░░░ 0%
+────  ───────────────────────  ────────────  ──────────────────
+1     Implement login form     in-progress   ━━━━━━━━━─────────  50%
+1.1   Add email validation     completed     ━━━━━━━━━━━━━━━━━━ 100%
+1.2   Add password rules       pending       ──────────────────   0%
+2     Design API endpoints     pending       ──────────────────   0%
 ```
 
-Progress bar: Use `█` for filled and `░` for empty, 8 characters wide. Calculate fill: `round(progress / 100 * 8)`.
+Progress bar: Use `━` for filled and `─` for empty, 18 characters wide. Calculate fill: `round(progress / 100 * 18)`.
 
 Subtasks (IDs containing ".") should be indented with 2 spaces.
 

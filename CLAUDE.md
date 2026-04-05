@@ -12,7 +12,7 @@ Spec-driven development via 4 Claude Code slash commands. No build step, no npm 
 ## Key Directories
 
 - `.claude/skills/brain-{init,spec,task,status}/` — Skill implementations
-- `SPEC.md` — Reference specification
+- `docs/legacy/SPEC.md` — Legacy MCP server reference (project pivoted to skills)
 
 ## Data Directory Convention
 
