@@ -114,3 +114,33 @@ test_checksums_covers_all_skills() {
     assert_contains "$content" "brain-task/SKILL.md" "checksums should cover brain-task"
     assert_contains "$content" "brain-status/SKILL.md" "checksums should cover brain-status"
 }
+
+test_checksums_match_actual_files() {
+    # Verify checksums.txt hashes match current file contents
+    local result
+    result=$(cd "$REPO_ROOT" && sha256sum -c checksums.txt 2>&1) || {
+        TEST_FAILURES="${TEST_FAILURES}    FAIL: checksums.txt hashes do not match files\n      $result\n"
+        return 1
+    }
+    return 0
+}
+
+test_changelog_not_stale() {
+    # CHANGELOG should reference work done in recent commits
+    local content
+    content=$(cat "$REPO_ROOT/CHANGELOG.md")
+    # Must document the senior review remediation and April 2026 update
+    assert_contains "$content" "frontmatter" "CHANGELOG should document frontmatter changes"
+    assert_contains "$content" "test suite" "CHANGELOG should document test suite addition"
+}
+
+test_no_stray_session_files() {
+    # Session archive files should not be tracked in repo root
+    local found
+    found=$(find "$REPO_ROOT" -maxdepth 1 -name 'session_*.md' -type f 2>/dev/null || true)
+    if [[ -n "$found" ]]; then
+        TEST_FAILURES="${TEST_FAILURES}    FAIL: stray session file(s) in repo root: $found\n"
+        return 1
+    fi
+    return 0
+}

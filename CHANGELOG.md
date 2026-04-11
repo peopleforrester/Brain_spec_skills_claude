@@ -2,6 +2,28 @@
 
 All notable changes to Brain Spec Skills are documented here.
 
+## [1.1.0] - 2026-04-06
+
+### Added
+- YAML frontmatter on all SKILL.md files (`name`, `description`, `context`, `argument-hint`, `allowed-tools`)
+- `argument-hint` field on brain-spec and brain-task for subcommand autocomplete
+- `allowed-tools` field on all 4 skills to suppress permission prompts
+- Bash test suite with 46 tests across 4 files (install, schema, docs, housekeeping)
+- `.editorconfig` for markdown, shell, and JSON formatting consistency
+- `checksums.txt` with SHA256 hashes for integrity verification
+- Checksum verification instructions in README
+
+### Changed
+- Dashboard format standardized to Unicode box-drawing characters across all docs
+- Progress bars standardized to `━`/`─` at 18 characters wide across all skills
+- Replaced phantom `AskUserQuestion` tool references with natural language instructions
+- Renamed `TMPDIR` to `CLONE_DIR` in install.sh to avoid shadowing standard env var
+- Removed unenforced `maxTasksPerSpec` and `staleThresholdDays` config defaults
+- Added ABOUTME HTML comments to all SKILL.md files
+
+### Moved
+- `SPEC.md` relocated to `docs/legacy/SPEC.md` (legacy MCP server reference)
+
 ## [1.0.0] - 2026-02-05
 
 ### Added
