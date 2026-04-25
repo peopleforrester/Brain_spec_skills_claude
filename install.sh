@@ -11,27 +11,39 @@ CLONE_DIR=""
 # --- Parse arguments ---
 GLOBAL=false
 TARGET_DIR=".claude/skills"
+VERSION_TAG=""
 
-for arg in "$@"; do
-  case "$arg" in
+while [[ $# -gt 0 ]]; do
+  case "$1" in
     --global)
       GLOBAL=true
       TARGET_DIR="$HOME/.claude/skills"
+      shift
+      ;;
+    --version)
+      if [[ -z "${2:-}" ]]; then
+        echo "Error: --version requires a tag argument (e.g. --version v1.1.1)"
+        exit 1
+      fi
+      VERSION_TAG="$2"
+      shift 2
       ;;
     --help|-h)
-      echo "Usage: install.sh [--global]"
+      echo "Usage: install.sh [--global] [--version <tag>]"
       echo ""
       echo "Install Brain Spec Skills into your Claude Code project."
       echo ""
       echo "Options:"
-      echo "  --global    Install to ~/.claude/skills/ (available in all projects)"
-      echo "  --help      Show this help message"
+      echo "  --global           Install to ~/.claude/skills/ (available in all projects)"
+      echo "  --version <tag>    Pin to a specific release tag (e.g. v1.1.1)."
+      echo "                     Default: clone the default branch."
+      echo "  --help             Show this help message"
       echo ""
       echo "Default: installs to .claude/skills/ in the current directory."
       exit 0
       ;;
     *)
-      echo "Error: unknown argument '$arg'. Use --help for usage."
+      echo "Error: unknown argument '$1'. Use --help for usage."
       exit 1
       ;;
   esac
@@ -70,13 +82,18 @@ done
 
 # --- Clone repo to temp directory ---
 CLONE_DIR=$(mktemp -d)
-echo "Fetching latest skills..."
-git clone --depth 1 --quiet "$REPO_URL" "$CLONE_DIR"
+if [[ -n "$VERSION_TAG" ]]; then
+  echo "Fetching skills at $VERSION_TAG..."
+  git clone --depth 1 --quiet --branch "$VERSION_TAG" "$REPO_URL" "$CLONE_DIR"
+else
+  echo "Fetching latest skills..."
+  git clone --depth 1 --quiet "$REPO_URL" "$CLONE_DIR"
+fi
 
 # --- Read version ---
 NEW_VERSION="unknown"
 if [[ -f "$CLONE_DIR/VERSION" ]]; then
-  NEW_VERSION=$(cat "$CLONE_DIR/VERSION" | tr -d '[:space:]')
+  NEW_VERSION=$(tr -d '[:space:]' < "$CLONE_DIR/VERSION")
 fi
 
 # --- Create target directory ---

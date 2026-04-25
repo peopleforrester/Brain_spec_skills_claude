@@ -31,16 +31,17 @@ read source-of-truth files, not summary docs. CI not yet wired (Phase B).
 - [x] GitHub Actions workflow `.github/workflows/test.yml` runs `tests/run-tests.sh` + checksum verify on push/PR
 - [x] H3: brain-task log step 4 now branches on `git status --porcelain` (dirty vs clean tree)
 
-## Phase C — Polish (PENDING)
+## Phase C — Polish (DONE)
 
-- [ ] README badges (CI status, license, version)
-- [ ] CONTRIBUTING.md documenting staging→main workflow and how to regenerate checksums
-- [ ] shellcheck enforcement in CI (M2/L2)
-- [ ] install.sh tag pinning support (`--version v1.1.1`) (M2)
+- [x] README badges (CI status, version, license)
+- [x] `CONTRIBUTING.md` documenting staging→main workflow and checksum regen command
+- [x] shellcheck enforcement in CI (M2/L2)
+- [x] `install.sh --version <tag>` for release pinning (M2)
+- [x] Replaced `cat file | tr` UUOC in install.sh with redirected input
 
 ## Branch / Test Status
 
 - Branch: `staging`
-- Tests: 57/57 passing locally
-- Last commit: TBD after Phase A commit
-- Remote: not yet pushed for this round
+- Tests: 67/67 passing locally
+- Phase A pushed (1fcaef6), Phase B pushed (2b63926), Phase C commit pending
+- Remote: pushes happen sequentially; main merge is the last step

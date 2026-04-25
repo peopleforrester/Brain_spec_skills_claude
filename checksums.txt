@@ -1,4 +1,4 @@
-24c1e151ee948cc30362c8e8008e0ea90ab650d01d8bd2807a1ddc489e9f501d  install.sh
+fbb3ff2152b770857d2ac4abfd790aacb565fa4b6cea44a85d40eeb5552ebe45  install.sh
 0d25730b501933a2abd5a51022bfbc797db95b885488be52be750ed007d7769d  .claude/skills/brain-init/SKILL.md
 fb23381f4c346a418fb910e36bd90e052997707c78c0203b95cda77da13f520e  .claude/skills/brain-spec/SKILL.md
 e39de6218a6b8927711a5814f8daba216f37f44898295ebc2e0aecdb75686401  .claude/skills/brain-status/SKILL.md

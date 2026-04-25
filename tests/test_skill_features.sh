@@ -83,6 +83,13 @@ test_ci_workflow_triggers_on_push_and_pr() {
 
 # --- Tests for brain-task log git auto-detection (H3) ---
 
+test_ci_workflow_runs_shellcheck() {
+    local content
+    content=$(cat "$REPO_ROOT/.github/workflows/test.yml" 2>/dev/null || echo "")
+    assert_contains "$content" "shellcheck" \
+        "CI workflow should run shellcheck against shell scripts"
+}
+
 test_brain_task_log_branches_on_working_tree() {
     # Step 4 must document both clean and dirty working-tree paths so the
     # auto-detection produces the right diff range / timestamp in each case.

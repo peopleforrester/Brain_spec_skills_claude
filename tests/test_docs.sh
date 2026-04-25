@@ -164,6 +164,28 @@ test_skill_versions_match_root() {
     done
 }
 
+test_readme_has_ci_badge() {
+    local readme
+    readme=$(cat "$REPO_ROOT/README.md")
+    assert_contains "$readme" "actions/workflows/test.yml" \
+        "README should display the CI workflow badge"
+}
+
+test_contributing_exists() {
+    assert_file_exists "$REPO_ROOT/CONTRIBUTING.md" "CONTRIBUTING.md should exist"
+}
+
+test_contributing_documents_workflow() {
+    local content
+    content=$(cat "$REPO_ROOT/CONTRIBUTING.md" 2>/dev/null || echo "")
+    assert_contains "$content" "staging" \
+        "CONTRIBUTING should explain the staging branch"
+    assert_contains "$content" "checksums.txt" \
+        "CONTRIBUTING should explain regenerating checksums"
+    assert_contains "$content" "tests/run-tests.sh" \
+        "CONTRIBUTING should reference the test runner"
+}
+
 test_steering_tech_no_askuserquestion() {
     local tech="$REPO_ROOT/.brain-spec/steering/tech.md"
     if [[ -f "$tech" ]]; then

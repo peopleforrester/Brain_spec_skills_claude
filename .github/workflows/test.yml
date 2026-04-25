@@ -26,3 +26,10 @@ jobs:
       - name: Verify checksums
         shell: bash
         run: sha256sum -c checksums.txt
+
+      - name: Lint shell scripts with shellcheck
+        shell: bash
+        # Test files reference helper functions injected by run-tests.sh at
+        # runtime (assert_contains, etc.); shellcheck cannot resolve those, so
+        # we lint the runner and the installer — the two standalone scripts.
+        run: shellcheck install.sh tests/run-tests.sh
