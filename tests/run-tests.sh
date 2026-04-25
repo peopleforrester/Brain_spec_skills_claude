@@ -21,7 +21,6 @@ fi
 TOTAL=0
 PASSED=0
 FAILED=0
-ERRORS=""
 
 # --- Test assertion functions (sourced by test files) ---
 export TEST_CURRENT=""
