@@ -26,10 +26,10 @@ read source-of-truth files, not summary docs. CI not yet wired (Phase B).
 - [x] Updated dashboard version examples in QUICKSTART/SKILLS-REFERENCE to v1.1.1
 - [x] PROJECT_STATE.md updated (this file)
 
-## Phase B — Sprint items (PENDING)
+## Phase B — Sprint items (DONE)
 
-- [ ] Add GitHub Actions workflow `.github/workflows/test.yml` running `tests/run-tests.sh`
-- [ ] Fix H3: branch brain-task log step 4 logic on dirty vs clean working tree
+- [x] GitHub Actions workflow `.github/workflows/test.yml` runs `tests/run-tests.sh` + checksum verify on push/PR
+- [x] H3: brain-task log step 4 now branches on `git status --porcelain` (dirty vs clean tree)
 
 ## Phase C — Polish (PENDING)
 

@@ -9,7 +9,9 @@ All notable changes to Brain Spec Skills are documented here.
 - `${CLAUDE_SKILL_DIR}` variable substitution in brain-status for runtime version detection
 - `${CLAUDE_SESSION_ID}` reference in brain-task implementation log template
 - `hooks:` frontmatter field on brain-init for skill-scoped lifecycle hooks
-- Tests covering plugin manifest, variable substitutions, allowed-tools format, version-CHANGELOG sync
+- GitHub Actions workflow (`.github/workflows/test.yml`) running the bash test suite and checksum verification on push/PR
+- brain-task log step 4 now branches on `git status --porcelain` so dirty (pre-commit) and clean (post-commit) trees both produce the right diff range and timestamp
+- Tests covering plugin manifest, variable substitutions, allowed-tools format, version-CHANGELOG sync, CI workflow, brain-task log auto-detection
 
 ### Changed
 - `allowed-tools` frontmatter on all 4 skills now uses comma-separated list (was space-separated, parsed as a single string)

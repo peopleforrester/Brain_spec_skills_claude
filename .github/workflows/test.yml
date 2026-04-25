@@ -1,0 +1,28 @@
+# ABOUTME: GitHub Actions workflow that runs the bash test suite on push/PR.
+# ABOUTME: Tests are pure bash; no toolchain setup beyond the Ubuntu default shell.
+
+name: tests
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  bash-tests:
+    name: Run tests/run-tests.sh
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run test suite
+        shell: bash
+        run: bash tests/run-tests.sh
+
+      - name: Verify checksums
+        shell: bash
+        run: sha256sum -c checksums.txt

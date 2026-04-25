@@ -59,3 +59,37 @@ test_plugin_manifest_has_skills() {
     assert_contains "$content" "brain-task" "plugin manifest should list brain-task"
     assert_contains "$content" "brain-status" "plugin manifest should list brain-status"
 }
+
+# --- Tests for CI workflow ---
+
+test_ci_workflow_exists() {
+    assert_file_exists "$REPO_ROOT/.github/workflows/test.yml" \
+        "CI workflow should exist at .github/workflows/test.yml"
+}
+
+test_ci_workflow_runs_test_suite() {
+    local content
+    content=$(cat "$REPO_ROOT/.github/workflows/test.yml" 2>/dev/null || echo "")
+    assert_contains "$content" "tests/run-tests.sh" \
+        "CI workflow should run tests/run-tests.sh"
+}
+
+test_ci_workflow_triggers_on_push_and_pr() {
+    local content
+    content=$(cat "$REPO_ROOT/.github/workflows/test.yml" 2>/dev/null || echo "")
+    assert_contains "$content" "push:" "CI workflow should trigger on push"
+    assert_contains "$content" "pull_request:" "CI workflow should trigger on pull_request"
+}
+
+# --- Tests for brain-task log git auto-detection (H3) ---
+
+test_brain_task_log_branches_on_working_tree() {
+    # Step 4 must document both clean and dirty working-tree paths so the
+    # auto-detection produces the right diff range / timestamp in each case.
+    local content
+    content=$(cat "$SKILLS_DIR/brain-task/SKILL.md")
+    assert_contains "$content" "git status --porcelain" \
+        "brain-task log should branch on git status --porcelain (dirty vs clean)"
+    assert_contains "$content" "HEAD~1..HEAD" \
+        "brain-task log should reference HEAD~1..HEAD diff range for clean tree"
+}
