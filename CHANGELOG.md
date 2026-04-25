@@ -2,6 +2,24 @@
 
 All notable changes to Brain Spec Skills are documented here.
 
+## [1.1.1] - 2026-04-26
+
+### Added
+- `.claude-plugin/plugin.json` manifest for plugin distribution (name, version, keywords)
+- `${CLAUDE_SKILL_DIR}` variable substitution in brain-status for runtime version detection
+- `${CLAUDE_SESSION_ID}` reference in brain-task implementation log template
+- `hooks:` frontmatter field on brain-init for skill-scoped lifecycle hooks
+- Tests covering plugin manifest, variable substitutions, allowed-tools format, version-CHANGELOG sync
+
+### Changed
+- `allowed-tools` frontmatter on all 4 skills now uses comma-separated list (was space-separated, parsed as a single string)
+- brain-status reads VERSION from `${CLAUDE_SKILL_DIR}` so the dashboard reports the correct version regardless of install location
+- `VERSION` files bumped to 1.1.1 across root and all skill directories — earlier files lagged the CHANGELOG
+
+### Removed
+- Phantom `AskUserQuestion` reference in `.brain-spec/steering/tech.md` (matches the v1.1.0 sweep across docs and skills)
+- Stray `SPEC.md` and `session_*.md` artifacts from repo root
+
 ## [1.1.0] - 2026-04-06
 
 ### Added

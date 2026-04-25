@@ -2,7 +2,7 @@
 name: brain-status
 description: Display a quick overview of the Brain Spec workspace with steering doc status, specs, tasks, and progress.
 context: fork
-allowed-tools: Glob Read Grep Bash
+allowed-tools: Glob, Read, Grep, Bash
 ---
 <!-- ABOUTME: Skill instructions for /brain-status slash command. -->
 <!-- ABOUTME: Displays workspace dashboard with steering docs, specs, tasks, and progress bars. -->
@@ -23,7 +23,7 @@ No arguments. Reads workspace state and displays a summary.
 
 ### Step 1: Read Version
 
-Use Glob to check for a VERSION file in `.claude/skills/brain-status/VERSION` or `.claude/skills/brain-init/VERSION`. If found, read it and store the version string for the dashboard header. If not found, use "dev" as the version.
+Read the VERSION file at `${CLAUDE_SKILL_DIR}/VERSION` (the directory of the currently running skill, exported by Claude Code). If `${CLAUDE_SKILL_DIR}` is unset (older runtimes), fall back to checking `.claude/skills/brain-status/VERSION` then `.claude/skills/brain-init/VERSION` via Glob. If no VERSION file is found in any location, use "dev" for the dashboard header.
 
 ### Step 2: Verify Workspace
 

@@ -1,36 +1,46 @@
-# PROJECT_STATE — Senior Review Remediation
+# PROJECT_STATE — Senior Review (April 2026) Remediation
 
-## Status: COMPLETE
+## Status: Phase A complete (in progress: B, C)
 
-All 5 phases of the senior review remediation are done, tested, and merged to main.
+Two senior reviews have been executed. The first (March 2026) shipped as v1.1.0
+(see CHANGELOG). A follow-up review on 2026-04-24 found stale artifacts,
+version drift, and frontmatter issues that this round resolves.
 
-## Completed Phases
+## Verification Method
 
-### Phase 1: Critical Fixes
-- [x] Added YAML frontmatter to all 4 SKILL.md files (name, description, context)
-- [x] Fixed brain-status `context: fork` from bare text to proper frontmatter
-- [x] Replaced all AskUserQuestion references with natural language (8 occurrences)
+Bash test suite (`tests/run-tests.sh`) — 57 tests across 5 files. All assertions
+read source-of-truth files, not summary docs. CI not yet wired (Phase B).
 
-### Phase 2: Install Script Hardening
-- [x] Renamed TMPDIR → CLONE_DIR to avoid shadowing standard env var
-- [x] Added checksums.txt with SHA256 hashes + verification docs in README
+## Phase A — Critical/High senior-review fixes (DONE)
 
-### Phase 3: Documentation Consistency
-- [x] Reconciled dashboard format to Unicode box-drawing everywhere
-- [x] Standardized progress bars to ━/─ at 18 chars across all skills
-- [x] Fixed relative links in QUICKSTART.md
-- [x] Moved SPEC.md to docs/legacy/, updated all references
+- [x] Deleted stray `SPEC.md` and `session_*.md` from repo root
+- [x] Bumped `VERSION` (root + all 4 skills) to `1.1.1`
+- [x] `allowed-tools` frontmatter on all 4 skills converted to comma-separated YAML
+- [x] `hooks:` field added to brain-init frontmatter
+- [x] brain-status uses `${CLAUDE_SKILL_DIR}` for runtime version detection
+- [x] brain-task references `${CLAUDE_SESSION_ID}` in implementation log template
+- [x] `.claude-plugin/plugin.json` manifest created
+- [x] Removed phantom `AskUserQuestion` reference from `.brain-spec/steering/tech.md`
+- [x] Regenerated `checksums.txt`
+- [x] Updated CHANGELOG with `[1.1.1]` entry
+- [x] Updated dashboard version examples in QUICKSTART/SKILLS-REFERENCE to v1.1.1
+- [x] PROJECT_STATE.md updated (this file)
 
-### Phase 4: Test Suite
-- [x] Created bash test runner (tests/run-tests.sh) with assertion framework
-- [x] 43 tests across 4 test files: install, schema, docs, housekeeping
-- [x] All tests passing on both staging and main
+## Phase B — Sprint items (PENDING)
 
-### Phase 5: Housekeeping
-- [x] Added .editorconfig for markdown/shell/json
-- [x] Added ABOUTME HTML comments to all SKILL.md files
-- [x] Removed dead config defaults (maxTasksPerSpec, staleThresholdDays)
+- [ ] Add GitHub Actions workflow `.github/workflows/test.yml` running `tests/run-tests.sh`
+- [ ] Fix H3: branch brain-task log step 4 logic on dirty vs clean working tree
 
-## Branch Status
-- staging: pushed, up to date
-- main: merged from staging, pushed, 43/43 tests passing
+## Phase C — Polish (PENDING)
+
+- [ ] README badges (CI status, license, version)
+- [ ] CONTRIBUTING.md documenting staging→main workflow and how to regenerate checksums
+- [ ] shellcheck enforcement in CI (M2/L2)
+- [ ] install.sh tag pinning support (`--version v1.1.1`) (M2)
+
+## Branch / Test Status
+
+- Branch: `staging`
+- Tests: 57/57 passing locally
+- Last commit: TBD after Phase A commit
+- Remote: not yet pushed for this round

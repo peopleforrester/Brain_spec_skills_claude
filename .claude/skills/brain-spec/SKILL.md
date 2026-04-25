@@ -2,7 +2,7 @@
 name: brain-spec
 description: Spec lifecycle management — create, interview, list, get, update, delete, and archive feature specifications.
 argument-hint: "<subcommand> [args] — create|interview|list|get|update|delete|archive"
-allowed-tools: Glob Read Write Edit Bash
+allowed-tools: Glob, Read, Write, Edit, Bash
 ---
 <!-- ABOUTME: Skill instructions for /brain-spec slash command. -->
 <!-- ABOUTME: Manages spec lifecycle: create, interview, list, get, update, delete, archive. -->

@@ -2,7 +2,7 @@
 name: brain-task
 description: Task management — create, update, list, log, and track progress for spec implementation tasks.
 argument-hint: "<subcommand> [args] — create|update|list|log|progress"
-allowed-tools: Glob Read Write Edit Bash
+allowed-tools: Glob, Read, Write, Edit, Bash
 ---
 <!-- ABOUTME: Skill instructions for /brain-task slash command. -->
 <!-- ABOUTME: Manages implementation tasks: create, update, list, log, and progress tracking. -->
@@ -76,6 +76,7 @@ Logs are written to `.brain-spec/tasks/{slug}/logs/{id}.log.md`:
 - **Commit**: {commitSha}
 - **Branch**: {branch}
 - **Date**: {timestamp}
+- **Session**: ${CLAUDE_SESSION_ID}
 
 ## Files Changed
 ### Modified

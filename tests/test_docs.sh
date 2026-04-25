@@ -144,3 +144,32 @@ test_no_stray_session_files() {
     fi
     return 0
 }
+
+test_version_matches_changelog() {
+    # Root VERSION must match the most recent (top-most) CHANGELOG entry
+    local version latest
+    version=$(cat "$REPO_ROOT/VERSION")
+    latest=$(grep -oP '^## \[\K[^\]]+' "$REPO_ROOT/CHANGELOG.md" | head -1)
+    assert_equals "$latest" "$version" "VERSION should match latest CHANGELOG entry"
+}
+
+test_skill_versions_match_root() {
+    local root_version
+    root_version=$(cat "$REPO_ROOT/VERSION")
+    local skill
+    for skill in brain-init brain-spec brain-task brain-status; do
+        local sv
+        sv=$(cat "$REPO_ROOT/.claude/skills/$skill/VERSION")
+        assert_equals "$root_version" "$sv" "$skill VERSION should match root VERSION"
+    done
+}
+
+test_steering_tech_no_askuserquestion() {
+    local tech="$REPO_ROOT/.brain-spec/steering/tech.md"
+    if [[ -f "$tech" ]]; then
+        local content
+        content=$(cat "$tech")
+        assert_not_contains "$content" "AskUserQuestion" \
+            ".brain-spec/steering/tech.md should not reference AskUserQuestion"
+    fi
+}

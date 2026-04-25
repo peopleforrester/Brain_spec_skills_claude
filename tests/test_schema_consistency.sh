@@ -151,3 +151,28 @@ test_all_skills_have_version_files() {
         assert_file_exists "$SKILLS_DIR/$skill/VERSION" "$skill should have VERSION file"
     done
 }
+
+test_allowed_tools_uses_comma_separator() {
+    # allowed-tools must be comma-separated to parse as a tool list, not a
+    # single space-joined string. Senior review H2.
+    local skill
+    for skill in brain-init brain-spec brain-task brain-status; do
+        local file="$SKILLS_DIR/$skill/SKILL.md"
+        local line
+        line=$(grep '^allowed-tools:' "$file" || true)
+        if [[ -n "$line" ]]; then
+            # Extract value after the colon
+            local value="${line#allowed-tools:}"
+            value="${value# }"
+            # If value contains 2+ tool names, they must be comma-separated
+            local space_count comma_count
+            space_count=$(grep -o ' ' <<< "$value" | wc -l)
+            comma_count=$(grep -o ',' <<< "$value" | wc -l)
+            if [[ $space_count -gt 0 && $comma_count -eq 0 ]]; then
+                TEST_FAILURES="${TEST_FAILURES}    FAIL: $skill allowed-tools must be comma-separated, got: '$value'\n"
+            fi
+        fi
+    done
+    [[ -z "$TEST_FAILURES" ]] || return 1
+    return 0
+}
