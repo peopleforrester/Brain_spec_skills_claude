@@ -18,6 +18,9 @@ Thumbs.db
 # Logs
 *.log
 
+# Session archives
+session_*.md
+
 # Node (legacy, no longer used)
 node_modules/
 dist/

@@ -114,3 +114,84 @@ test_checksums_covers_all_skills() {
     assert_contains "$content" "brain-task/SKILL.md" "checksums should cover brain-task"
     assert_contains "$content" "brain-status/SKILL.md" "checksums should cover brain-status"
 }
+
+test_checksums_match_actual_files() {
+    # Verify checksums.txt hashes match current file contents
+    local result
+    result=$(cd "$REPO_ROOT" && sha256sum -c checksums.txt 2>&1) || {
+        TEST_FAILURES="${TEST_FAILURES}    FAIL: checksums.txt hashes do not match files\n      $result\n"
+        return 1
+    }
+    return 0
+}
+
+test_changelog_not_stale() {
+    # CHANGELOG should reference work done in recent commits
+    local content
+    content=$(cat "$REPO_ROOT/CHANGELOG.md")
+    # Must document the senior review remediation and April 2026 update
+    assert_contains "$content" "frontmatter" "CHANGELOG should document frontmatter changes"
+    assert_contains "$content" "test suite" "CHANGELOG should document test suite addition"
+}
+
+test_no_stray_session_files() {
+    # Session archive files should not be tracked in repo root
+    local found
+    found=$(find "$REPO_ROOT" -maxdepth 1 -name 'session_*.md' -type f 2>/dev/null || true)
+    if [[ -n "$found" ]]; then
+        TEST_FAILURES="${TEST_FAILURES}    FAIL: stray session file(s) in repo root: $found\n"
+        return 1
+    fi
+    return 0
+}
+
+test_version_matches_changelog() {
+    # Root VERSION must match the most recent (top-most) CHANGELOG entry
+    local version latest
+    version=$(cat "$REPO_ROOT/VERSION")
+    latest=$(grep -oP '^## \[\K[^\]]+' "$REPO_ROOT/CHANGELOG.md" | head -1)
+    assert_equals "$latest" "$version" "VERSION should match latest CHANGELOG entry"
+}
+
+test_skill_versions_match_root() {
+    local root_version
+    root_version=$(cat "$REPO_ROOT/VERSION")
+    local skill
+    for skill in brain-init brain-spec brain-task brain-status; do
+        local sv
+        sv=$(cat "$REPO_ROOT/.claude/skills/$skill/VERSION")
+        assert_equals "$root_version" "$sv" "$skill VERSION should match root VERSION"
+    done
+}
+
+test_readme_has_ci_badge() {
+    local readme
+    readme=$(cat "$REPO_ROOT/README.md")
+    assert_contains "$readme" "actions/workflows/test.yml" \
+        "README should display the CI workflow badge"
+}
+
+test_contributing_exists() {
+    assert_file_exists "$REPO_ROOT/CONTRIBUTING.md" "CONTRIBUTING.md should exist"
+}
+
+test_contributing_documents_workflow() {
+    local content
+    content=$(cat "$REPO_ROOT/CONTRIBUTING.md" 2>/dev/null || echo "")
+    assert_contains "$content" "staging" \
+        "CONTRIBUTING should explain the staging branch"
+    assert_contains "$content" "checksums.txt" \
+        "CONTRIBUTING should explain regenerating checksums"
+    assert_contains "$content" "tests/run-tests.sh" \
+        "CONTRIBUTING should reference the test runner"
+}
+
+test_steering_tech_no_askuserquestion() {
+    local tech="$REPO_ROOT/.brain-spec/steering/tech.md"
+    if [[ -f "$tech" ]]; then
+        local content
+        content=$(cat "$tech")
+        assert_not_contains "$content" "AskUserQuestion" \
+            ".brain-spec/steering/tech.md should not reference AskUserQuestion"
+    fi
+}

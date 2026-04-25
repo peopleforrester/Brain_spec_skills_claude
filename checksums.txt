@@ -1,5 +1,5 @@
-24c1e151ee948cc30362c8e8008e0ea90ab650d01d8bd2807a1ddc489e9f501d  install.sh
-0f5b2455c6301160a21f18eb3822f18cad97eb563bef45a16a5f2371e1c78a12  .claude/skills/brain-init/SKILL.md
-aecf7a9db3b6f096c80d3d9a9cc4d3724a762fae66ad86f1727c23107938daa5  .claude/skills/brain-spec/SKILL.md
-bd6084af47106067d413f4a0751e0df8ff480242eeacffc4ef9edc724be40452  .claude/skills/brain-status/SKILL.md
-e71c8328d4098bf9834eed846994288999024bcdb04d3fcbb46e6d4424e586fa  .claude/skills/brain-task/SKILL.md
+fbb3ff2152b770857d2ac4abfd790aacb565fa4b6cea44a85d40eeb5552ebe45  install.sh
+0d25730b501933a2abd5a51022bfbc797db95b885488be52be750ed007d7769d  .claude/skills/brain-init/SKILL.md
+fb23381f4c346a418fb910e36bd90e052997707c78c0203b95cda77da13f520e  .claude/skills/brain-spec/SKILL.md
+e39de6218a6b8927711a5814f8daba216f37f44898295ebc2e0aecdb75686401  .claude/skills/brain-status/SKILL.md
+3de003f951fa75456f9ddb30552d6c2944480bb6673d7a5e441307636ac585a7  .claude/skills/brain-task/SKILL.md

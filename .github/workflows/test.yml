@@ -1,0 +1,38 @@
+# ABOUTME: GitHub Actions workflow that runs the bash test suite on push/PR.
+# ABOUTME: Tests are pure bash; no toolchain setup beyond the Ubuntu default shell.
+
+name: tests
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  bash-tests:
+    name: Run tests/run-tests.sh
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Run test suite
+        shell: bash
+        run: bash tests/run-tests.sh
+
+      - name: Verify checksums
+        shell: bash
+        run: sha256sum -c checksums.txt
+
+      - name: Lint shell scripts with shellcheck
+        shell: bash
+        # Test files reference helper functions injected by run-tests.sh at
+        # runtime (assert_contains, etc.); shellcheck cannot resolve those, so
+        # we lint the runner and the installer — the two standalone scripts.
+        run: shellcheck install.sh tests/run-tests.sh

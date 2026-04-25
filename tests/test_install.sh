@@ -97,3 +97,17 @@ test_all_skills_listed() {
     assert_contains "$content" "brain-task" "should list brain-task"
     assert_contains "$content" "brain-status" "should list brain-status"
 }
+
+test_supports_version_flag() {
+    # Phase C / M2: install.sh should accept --version <tag> to pin to a release
+    local content
+    content=$(cat "$INSTALL_SCRIPT")
+    assert_contains "$content" "--version" "install.sh should accept --version flag"
+    assert_contains "$content" "--branch" "install.sh should pass --branch to git clone for tag pinning"
+}
+
+test_help_mentions_version_flag() {
+    local output
+    output=$(bash "$INSTALL_SCRIPT" --help 2>&1) || true
+    assert_contains "$output" "--version" "--help should document --version"
+}

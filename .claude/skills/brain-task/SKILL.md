@@ -2,7 +2,7 @@
 name: brain-task
 description: Task management — create, update, list, log, and track progress for spec implementation tasks.
 argument-hint: "<subcommand> [args] — create|update|list|log|progress"
-allowed-tools: Glob Read Write Edit Bash
+allowed-tools: Glob, Read, Write, Edit, Bash
 ---
 <!-- ABOUTME: Skill instructions for /brain-task slash command. -->
 <!-- ABOUTME: Manages implementation tasks: create, update, list, log, and progress tracking. -->
@@ -76,6 +76,7 @@ Logs are written to `.brain-spec/tasks/{slug}/logs/{id}.log.md`:
 - **Commit**: {commitSha}
 - **Branch**: {branch}
 - **Date**: {timestamp}
+- **Session**: ${CLAUDE_SESSION_ID}
 
 ## Files Changed
 ### Modified
@@ -193,15 +194,21 @@ Create an implementation log for a task, documenting what was done.
 
 1. Read `.brain-spec/tasks/{slug}/tasks.json`. Find the task by ID. If not found, error.
 2. Create `.brain-spec/tasks/{slug}/logs/` directory if it doesn't exist.
-3. **Auto-enrich with git data**: Run these Bash commands to get current git context:
-   - `git rev-parse HEAD` — current commit SHA
-   - `git rev-parse --abbrev-ref HEAD` — current branch
-   - `git log -1 --format=%cI` — commit timestamp
-   If any fail (not a git repo), omit the Git Reference section.
-4. Ask the user for log details:
+3. **Auto-enrich with git data**: Run `git status --porcelain` first to determine which path applies. The dirty/clean state changes both the diff range and which commit metadata is meaningful:
+   - **Dirty working tree** (output non-empty — task logged before commit):
+     - `git rev-parse --abbrev-ref HEAD` — current branch
+     - Commit SHA: omit (no relevant commit yet) and use the current timestamp instead of a commit timestamp
+     - Diff range for file detection: `git diff --name-only` (unstaged) and `git diff --name-only --cached` (staged)
+   - **Clean working tree** (output empty — task logged after commit):
+     - `git rev-parse HEAD` — current commit SHA (the commit that finished the task)
+     - `git rev-parse --abbrev-ref HEAD` — current branch
+     - `git log -1 --format=%cI HEAD` — that commit's ISO timestamp
+     - Diff range for file detection: `HEAD~1..HEAD`
+   - If any command fails (not a git repo), omit the Git Reference section entirely.
+4. Ask the user for log details. Pre-fill **Files modified** and **Files created** by auto-detecting from the diff range chosen in step 3 (`git diff --name-only` for dirty, `git diff --name-only HEAD~1..HEAD` for clean) — confirm with the user before saving:
    - **Summary**: What was implemented? (required)
-   - **Files modified**: Which existing files were changed? (can auto-detect from `git diff --name-only HEAD~1` if available)
-   - **Files created**: Which new files were added?
+   - **Files modified**: Which existing files were changed? (auto-detected; user confirms or edits)
+   - **Files created**: Which new files were added? (auto-detected via `git diff --name-only --diff-filter=A` over the same range)
    - **Artifacts**: Any endpoints, functions, classes, components, or integrations created? (optional, ask one at a time)
    - **Notes**: Any additional notes?
 5. Build the log markdown using the template above, omitting empty sections.

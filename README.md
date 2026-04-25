@@ -1,5 +1,9 @@
 # Brain Spec Skills for Claude Code
 
+[![tests](https://github.com/peopleforrester/Brain_spec_skills_claude/actions/workflows/test.yml/badge.svg)](https://github.com/peopleforrester/Brain_spec_skills_claude/actions/workflows/test.yml)
+[![version](https://img.shields.io/badge/version-1.1.1-blue.svg)](CHANGELOG.md)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 > Spec-driven development inside Claude Code. No server, no dependencies -- just 4 slash commands.
 
 ## What is Brain Spec?
