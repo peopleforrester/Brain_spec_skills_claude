@@ -119,6 +119,7 @@ run_test() {
     local exit_code=0
     output=$(
         export TEST_FAILURES=""
+        # shellcheck source=/dev/null
         source "$test_file"
         "$test_func" 2>&1
         printf "\n__TEST_FAILURES__\n%s" "$TEST_FAILURES"
