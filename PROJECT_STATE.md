@@ -41,7 +41,8 @@ read source-of-truth files, not summary docs. CI not yet wired (Phase B).
 
 ## Branch / Test Status
 
-- Branch: `staging`
-- Tests: 67/67 passing locally
-- Phase A pushed (1fcaef6), Phase B pushed (2b63926), Phase C commit pending
-- Remote: pushes happen sequentially; main merge is the last step
+- Branch: `staging` and `main` are in sync (1.1.1 shipped)
+- Tests: 67/67 passing locally and on GitHub Actions (run 24942665928 staging, 24942680231 main)
+- shellcheck (`--severity=warning`) and checksum verification both pass in CI
+- Action pinned to SHA, `GITHUB_TOKEN` scoped `contents: read`
+- Note: GitHub deprecation warning about Node 20 will require updating `actions/checkout@v4.2.2` to a v5 release before June 2026 — minor follow-up
