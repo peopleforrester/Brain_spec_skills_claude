@@ -39,10 +39,17 @@ read source-of-truth files, not summary docs. CI not yet wired (Phase B).
 - [x] `install.sh --version <tag>` for release pinning (M2)
 - [x] Replaced `cat file | tr` UUOC in install.sh with redirected input
 
+## Phase D — Node 24 CI maintenance (2026-05-25, DONE)
+
+- [x] Bumped `actions/checkout` v4.2.2 (Node 20, deprecated ~June 2026) → v6.0.2 (Node 24), pinned to full SHA `de0fac2e4500dabe0009e67214ff5f5447ce83dd`
+- [x] Added regression test `test_ci_checkout_action_runs_on_supported_node` (rejects deprecated v4, requires v5/v6 SHA pin)
+- [x] Corrected `plugin.json` homepage to `peopleforrester` owner; synced its version (was drifted at 1.1.0)
+- [x] Patch bump to `1.1.2` across root + 4 skills + plugin.json + README badge + CHANGELOG
+
 ## Branch / Test Status
 
-- Branch: `staging` and `main` are in sync (1.1.1 shipped)
-- Tests: 67/67 passing locally and on GitHub Actions (run 24942665928 staging, 24942680231 main)
-- shellcheck (`--severity=warning`) and checksum verification both pass in CI
+- Version: `1.1.2`
+- Branch: `staging` and `main` in sync after this lands (1.1.2)
+- Tests: 68/68 passing locally and shellcheck clean; CI re-verified after push
 - Action pinned to SHA, `GITHUB_TOKEN` scoped `contents: read`
-- Note: GitHub deprecation warning about Node 20 will require updating `actions/checkout@v4.2.2` to a v5 release before June 2026 — minor follow-up
+- v6.0.0's only substantive change (separate git-credentials file) is transparent for our plain default checkout

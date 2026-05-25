@@ -2,6 +2,15 @@
 
 All notable changes to Brain Spec Skills are documented here.
 
+## [1.1.2] - 2026-05-25
+
+### Changed
+- CI: bumped `actions/checkout` from v4.2.2 (Node 20, deprecated ~June 2026) to v6.0.2 (Node 24), pinned to full commit SHA
+- `.claude-plugin/plugin.json`: corrected `homepage` URL to the actual repository owner and synced `version` to the package version
+
+### Added
+- Regression test asserting the CI checkout action stays on a supported Node runtime (v5+), never the deprecated v4
+
 ## [1.1.1] - 2026-04-26
 
 ### Added
