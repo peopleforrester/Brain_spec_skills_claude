@@ -1,11 +1,11 @@
 {
   "name": "brain-spec-skills",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Spec-driven development for Claude Code via 4 markdown skills: brain-init, brain-spec, brain-task, brain-status. Zero startup cost; all schemas and templates embedded in SKILL.md.",
   "author": {
     "name": "Michael Rishi Forrester"
   },
-  "homepage": "https://github.com/MRF-WSL/Brain_spec_skills_claude",
+  "homepage": "https://github.com/peopleforrester/Brain_spec_skills_claude",
   "license": "MIT",
   "keywords": [
     "brain-init",

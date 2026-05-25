@@ -90,6 +90,20 @@ test_ci_workflow_runs_shellcheck() {
         "CI workflow should run shellcheck against shell scripts"
 }
 
+test_ci_checkout_action_runs_on_supported_node() {
+    # actions/checkout v4 runs on Node 20 (deprecated by GitHub ~June 2026);
+    # v5+ runs on Node 24. Pin to a full SHA and keep the version comment at
+    # v5 or newer so we never silently regress to a deprecated runtime.
+    local content
+    content=$(cat "$REPO_ROOT/.github/workflows/test.yml" 2>/dev/null || echo "")
+    assert_contains "$content" "actions/checkout@" \
+        "CI workflow should use actions/checkout"
+    assert_not_contains "$content" "# v4" \
+        "actions/checkout must not be pinned to deprecated v4 (Node 20); use v5+ (Node 24)"
+    assert_match 'actions/checkout@[0-9a-f]{40} # v[56]' "$content" \
+        "actions/checkout should pin a full SHA with a v5/v6 version comment"
+}
+
 test_brain_task_log_branches_on_working_tree() {
     # Step 4 must document both clean and dirty working-tree paths so the
     # auto-detection produces the right diff range / timestamp in each case.
