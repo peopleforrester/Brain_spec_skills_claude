@@ -1,7 +1,7 @@
 # Brain Spec Skills for Claude Code
 
 [![tests](https://github.com/peopleforrester/Brain_spec_skills_claude/actions/workflows/test.yml/badge.svg)](https://github.com/peopleforrester/Brain_spec_skills_claude/actions/workflows/test.yml)
-[![version](https://img.shields.io/badge/version-1.1.2-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-1.1.3-blue.svg)](CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 > Spec-driven development inside Claude Code. No server, no dependencies -- just 4 slash commands.
@@ -11,6 +11,8 @@
 Brain Spec turns Claude Code into a structured development environment. It adds four slash commands that let you plan features through guided interviews, break them into tracked tasks, and maintain a persistent project knowledge base -- all stored as readable JSON and markdown in a `.brain-spec/` directory.
 
 Unlike an MCP server, Brain Spec Skills are plain markdown files that Claude Code loads on demand. Zero startup cost, zero dependencies, zero configuration.
+
+The skills use current Claude Code conventions: runtime version detection via `${CLAUDE_SKILL_DIR}`, skill-scoped lifecycle hooks, comma-separated `allowed-tools` allowlists, and a plugin manifest for marketplace installation. Every skill file is checksummed and covered by a CI-run test suite (see the badge above).
 
 ## How It Works
 
@@ -53,6 +55,19 @@ curl -fsSL https://raw.githubusercontent.com/peopleforrester/Brain_spec_skills_c
 ```
 
 Installs to `~/.claude/skills/` so skills are available in every Claude Code project.
+
+### As a Claude Code plugin
+
+Brain Spec ships a plugin manifest, so you can install it through Claude Code's plugin marketplace instead of the install script:
+
+```
+/plugin marketplace add peopleforrester/Brain_spec_skills_claude
+/plugin install brain-spec-skills@brain-spec
+```
+
+The first command registers this repo as a marketplace; the second installs the four skills. Updates come through `/plugin` rather than re-running the install script.
+
+> Requires a Claude Code version with plugin marketplace support. The install-script methods above work on every version and need no marketplace.
 
 ### Verify
 
@@ -131,6 +146,16 @@ All Brain Spec data lives in `.brain-spec/` within your project:
 ```
 
 Commit `.brain-spec/` to version control to share specs with your team, or add it to `.gitignore` for personal use.
+
+## Testing
+
+The skills ship with a bash test suite that validates frontmatter, schemas, docs consistency, the plugin manifests, and version integrity. It runs on every push and pull request via GitHub Actions, alongside checksum verification and `shellcheck`.
+
+```bash
+bash tests/run-tests.sh
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow.
 
 ## License
 

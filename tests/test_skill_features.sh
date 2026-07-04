@@ -60,6 +60,32 @@ test_plugin_manifest_has_skills() {
     assert_contains "$content" "brain-status" "plugin manifest should list brain-status"
 }
 
+test_plugin_manifest_declares_skill_path() {
+    # Plugins scan skills/ at the plugin root, not .claude/skills/. Our skills
+    # live in .claude/skills/, so plugin.json must declare that custom path or
+    # the skills will not load when installed via /plugin install.
+    local content
+    content=$(cat "$REPO_ROOT/.claude-plugin/plugin.json")
+    assert_contains "$content" '.claude/skills' \
+        "plugin manifest should declare .claude/skills as a custom skill path"
+}
+
+# --- Tests for plugin marketplace (installability via /plugin) ---
+
+test_marketplace_manifest_exists() {
+    assert_file_exists "$REPO_ROOT/.claude-plugin/marketplace.json" \
+        "marketplace manifest should exist at .claude-plugin/marketplace.json"
+}
+
+test_marketplace_lists_plugin() {
+    local content
+    content=$(cat "$REPO_ROOT/.claude-plugin/marketplace.json" 2>/dev/null || echo "")
+    assert_contains "$content" '"name"' "marketplace should declare a name"
+    assert_contains "$content" '"owner"' "marketplace should declare an owner"
+    assert_contains "$content" '"plugins"' "marketplace should list plugins"
+    assert_contains "$content" '"source"' "marketplace plugin entry should declare a source"
+}
+
 # --- Tests for CI workflow ---
 
 test_ci_workflow_exists() {
@@ -100,8 +126,8 @@ test_ci_checkout_action_runs_on_supported_node() {
         "CI workflow should use actions/checkout"
     assert_not_contains "$content" "# v4" \
         "actions/checkout must not be pinned to deprecated v4 (Node 20); use v5+ (Node 24)"
-    assert_match 'actions/checkout@[0-9a-f]{40} # v[56]' "$content" \
-        "actions/checkout should pin a full SHA with a v5/v6 version comment"
+    assert_match 'actions/checkout@[0-9a-f]{40} # v[5-9]' "$content" \
+        "actions/checkout should pin a full SHA with a v5+ version comment (Node 24)"
 }
 
 test_brain_task_log_branches_on_working_tree() {

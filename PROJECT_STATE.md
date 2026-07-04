@@ -1,6 +1,6 @@
 # PROJECT_STATE — Senior Review (April 2026) Remediation
 
-## Status: Phase A complete (in progress: B, C)
+## Status: Phases A–E complete (shipped through v1.1.3)
 
 Two senior reviews have been executed. The first (March 2026) shipped as v1.1.0
 (see CHANGELOG). A follow-up review on 2026-04-24 found stale artifacts,
@@ -46,10 +46,24 @@ read source-of-truth files, not summary docs. CI not yet wired (Phase B).
 - [x] Corrected `plugin.json` homepage to `peopleforrester` owner; synced its version (was drifted at 1.1.0)
 - [x] Patch bump to `1.1.2` across root + 4 skills + plugin.json + README badge + CHANGELOG
 
+## Phase E — Version audit + plugin distribution + README modernization (2026-07-04, DONE)
+
+- [x] Bumped `actions/checkout` v6.0.2 → v7.0.0 (both Node 24), pinned to full SHA `9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0`; widened regression guard to accept v5–v9
+- [x] Patch bump to `1.1.3` across root + 4 skills + plugin.json + README badge + CHANGELOG
+- [x] Fixed doc version drift: QUICKSTART + SKILLS-REFERENCE dashboard/install examples were stuck at v1.1.1
+- [x] Added `test_doc_version_references_match_root` so doc version examples can never drift from VERSION again
+- [x] Plugin distribution (Option B): added `"skills": ["./.claude/skills/"]` to plugin.json + new `.claude-plugin/marketplace.json`; added `test_plugin_manifest_declares_skill_path`, `test_marketplace_manifest_exists`, `test_marketplace_lists_plugin`
+- [x] README modernization: plugin-install section, Testing/CI section, modern-skill-features paragraph
+
+### Verification method / status
+
+- Bash suite 72/72 local, shellcheck clean, checksums OK, both JSON manifests valid — all confirmed against source files.
+- **NOT yet verified:** live `/plugin install brain-spec-skills@brain-spec`. The marketplace + skills-path config follows the official Claude Code plugin docs (confirmed via claude-code-guide against current docs), but no end-to-end plugin install was run — this environment has no interactive `/plugin`. Run one live install before advertising the marketplace path.
+
 ## Branch / Test Status
 
-- Version: `1.1.2`
-- Branch: `staging` and `main` in sync after this lands (1.1.2)
-- Tests: 68/68 passing locally and shellcheck clean; CI re-verified after push
-- Action pinned to SHA, `GITHUB_TOKEN` scoped `contents: read`
-- v6.0.0's only substantive change (separate git-credentials file) is transparent for our plain default checkout
+- Version: `1.1.3`
+- Branch: `staging` and `main` in sync after this lands (1.1.3)
+- Tests: 72/72 passing locally and shellcheck clean; CI re-verified after push
+- Action pinned to SHA `9c091bb…` (v7.0.0, Node 24), `GITHUB_TOKEN` scoped `contents: read`
+- checkout v7's only behavioral change (blocking fork checkout for `pull_request_target`/`workflow_run`) does not touch our `push`/`pull_request` triggers

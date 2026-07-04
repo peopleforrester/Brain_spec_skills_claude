@@ -2,6 +2,20 @@
 
 All notable changes to Brain Spec Skills are documented here.
 
+## [1.1.3] - 2026-07-04
+
+### Added
+- Plugin marketplace manifest (`.claude-plugin/marketplace.json`) so the repo is installable via `/plugin marketplace add` + `/plugin install brain-spec-skills@brain-spec`
+- `skills` path (`./.claude/skills/`) in `plugin.json` so plugin installs discover the skills that live under `.claude/skills/` (plugins otherwise scan only `skills/` at the plugin root)
+- README sections for plugin install, CI/tested status, and the modern skill features (runtime `${CLAUDE_SKILL_DIR}` version detection, skill-scoped hooks)
+- Regression test asserting the docs' dashboard/install version examples track the root `VERSION` (guards the drift where a patch bump missed the doc examples)
+
+### Changed
+- CI: bumped `actions/checkout` from v6.0.2 to v7.0.0 (both Node 24; v7's fork-checkout restriction does not affect our `push`/`pull_request` triggers), pinned to full commit SHA
+- Synced doc version examples (QUICKSTART, SKILLS-REFERENCE) that were left at v1.1.1
+
+> Plugin-marketplace install is configured per the official Claude Code plugin docs. Verify with a live `/plugin install` before announcing it as a supported path.
+
 ## [1.1.2] - 2026-05-25
 
 ### Changed
