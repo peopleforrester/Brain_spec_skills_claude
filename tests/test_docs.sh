@@ -164,6 +164,31 @@ test_skill_versions_match_root() {
     done
 }
 
+test_doc_version_references_match_root() {
+    # Hardcoded version examples in the docs (dashboard banner, install output)
+    # must track the root VERSION. This guards the drift seen when a patch bump
+    # updated VERSION/CHANGELOG but left the doc examples on the old version.
+    local version
+    version=$(cat "$REPO_ROOT/VERSION")
+    local doc token
+    for doc in QUICKSTART.md SKILLS-REFERENCE.md; do
+        # "Brain Spec Dashboard vX.Y.Z" banner lines
+        while IFS= read -r token; do
+            [[ -z "$token" ]] && continue
+            assert_equals "$version" "$token" \
+                "$doc dashboard banner version should match root VERSION"
+        done < <(grep -oP 'Dashboard v\K[0-9]+\.[0-9]+\.[0-9]+' "$DOCS_DIR/$doc" || true)
+        # "Brain Spec Skills vX.Y.Z installed" output lines
+        while IFS= read -r token; do
+            [[ -z "$token" ]] && continue
+            assert_equals "$version" "$token" \
+                "$doc install-output version should match root VERSION"
+        done < <(grep -oP 'Brain Spec Skills v\K[0-9]+\.[0-9]+\.[0-9]+(?= installed)' "$DOCS_DIR/$doc" || true)
+    done
+    [[ -z "$TEST_FAILURES" ]] || return 1
+    return 0
+}
+
 test_readme_has_ci_badge() {
     local readme
     readme=$(cat "$REPO_ROOT/README.md")

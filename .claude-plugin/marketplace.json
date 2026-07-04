@@ -1,0 +1,14 @@
+{
+  "name": "brain-spec",
+  "owner": {
+    "name": "Michael Rishi Forrester"
+  },
+  "description": "Brain Spec Skills — spec-driven development for Claude Code.",
+  "plugins": [
+    {
+      "name": "brain-spec-skills",
+      "source": "./",
+      "description": "Four markdown skills for spec-driven development: brain-init, brain-spec, brain-task, brain-status. Skills load from .claude/skills/ via the plugin manifest's skills path."
+    }
+  ]
+}
