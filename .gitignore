@@ -33,3 +33,6 @@ coverage/
 
 # Imported context archive from claude.ai migration — local Claude Code context only, never publish (public repo).
 claude-ai-context/
+
+# Runtime session artifact from the in-session scheduler (not a project file)
+.claude/scheduled_tasks.lock
