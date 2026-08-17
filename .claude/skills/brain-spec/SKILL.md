@@ -1,7 +1,7 @@
 ---
 name: brain-spec
-description: Spec lifecycle management — create, interview, list, get, update, delete, and archive feature specifications.
-argument-hint: "<subcommand> [args] — create|interview|list|get|update|delete|archive"
+description: Spec lifecycle management — create, interview, list, get, update, validate, delete, and archive feature specifications.
+argument-hint: "<subcommand> [args] — create|interview|list|get|update|validate|delete|archive"
 allowed-tools: Glob, Read, Write, Edit, Bash
 ---
 <!-- ABOUTME: Skill instructions for /brain-spec slash command. -->
@@ -23,6 +23,7 @@ Subcommands:
 - `list [--status <status>]` — List all specs with status and task counts
 - `get <slug>` — Display a spec's content and metadata
 - `update <slug>` — Interactively update spec content or status
+- `validate <slug>` — Check a spec for completeness, EARS acceptance criteria, and task coverage
 - `delete <slug>` — Delete a spec (requires confirmation)
 - `archive <slug>` — Move a spec to the archive
 
@@ -180,8 +181,28 @@ TODO: Define data models and relationships
 - [ ] TODO: Break down into tasks
 
 ## Acceptance Criteria
-- [ ] TODO: Define acceptance criteria
+<!-- EARS notation: WHEN <event/condition> THE SYSTEM SHALL <observable behavior> -->
+- [ ] WHEN TODO: define trigger THE SYSTEM SHALL TODO: define observable behavior
 ```
+
+### Reference: EARS Acceptance Criteria
+
+Acceptance criteria use EARS (Easy Approach to Requirements Syntax) so each
+criterion is unambiguous and testable. The core template is:
+
+```
+WHEN <event or condition> THE SYSTEM SHALL <observable behavior>
+```
+
+Common EARS forms:
+- **Event-driven:** `WHEN a user submits an empty form THE SYSTEM SHALL display a validation error`
+- **State-driven:** `WHILE the account is locked THE SYSTEM SHALL reject login attempts`
+- **Unwanted behavior:** `IF the payment gateway times out THEN THE SYSTEM SHALL retry once before failing`
+- **Ubiquitous (always true):** `THE SYSTEM SHALL store passwords hashed with bcrypt`
+
+Each criterion should map to at least one testable behavior. During the
+interview and in `validate`, criteria that do not follow an EARS form are
+flagged so they can be rewritten into a checkable shape.
 
 ### Reference: Archive Metadata Schema
 
@@ -298,9 +319,31 @@ If no specs exist, display: "No specs found. Create one with `/brain-spec create
 4. For **Content**: Read current `.brain-spec/specs/{slug}.md`, show it, ask what to change. Apply edits using the Edit tool. Update `updatedAt` in meta.
 5. For **Description**: Ask for the new description, update meta, save.
 
-## Subcommand: `delete`
+## Subcommand: `validate`
 
-**Usage**: `/brain-spec delete my-feature-name`
+**Usage**: `/brain-spec validate my-feature-name`
+
+Checks a spec for completeness, EARS-formed acceptance criteria, and task
+coverage, then reports a pass / warn / fail verdict. Read-only: it never edits
+the spec or tasks.
+
+1. Read `.brain-spec/specs/{slug}.meta.json`. If not found, error: "No spec '{slug}'. Run /brain-spec list to see specs."
+2. Read `.brain-spec/specs/{slug}.md`.
+3. **Completeness check.** Flag every section whose body still contains a
+   `TODO:` placeholder. Required sections: Overview, Functional Requirements,
+   Acceptance Criteria. A `TODO:` in a required section is a FAIL; in any other
+   section it is a WARN.
+4. **EARS check.** For each line under Acceptance Criteria, flag any criterion
+   that does not match an EARS form (contains `THE SYSTEM SHALL`, optionally led
+   by `WHEN` / `WHILE` / `IF ... THEN`). A non-EARS criterion is a WARN; zero
+   acceptance criteria is a FAIL.
+5. **Task coverage check.** Read `.brain-spec/tasks/{slug}/tasks.json` if it
+   exists. If the spec has acceptance criteria but no tasks, WARN "no tasks cover
+   this spec." If `tasks.json` is missing entirely, WARN "run /brain-task create
+   to break this spec into tasks."
+6. **Report.** Print a verdict line (`PASS`, `WARN (n)`, or `FAIL (n)`) followed
+   by each finding as `[FAIL|WARN] <section>: <message>`. End with the single
+   highest-severity verdict so the result is scriptable. Exit without writing.
 
 1. Read `.brain-spec/specs/{slug}.meta.json`. If not found, error.
 2. Ask for confirmation: "Are you sure you want to delete spec '{name}' ({slug})? This will remove the spec file, metadata, and all associated tasks. This cannot be undone."

@@ -5,7 +5,7 @@ Spec-driven development via 4 Claude Code slash commands. No build step, no npm 
 ## Skills
 
 - `/brain-init` — Initialize `.brain-spec/` workspace, steering docs, CLAUDE.md generation
-- `/brain-spec` — Spec lifecycle: create, interview, list, get, update, delete, archive
+- `/brain-spec` — Spec lifecycle: create, interview, list, get, update, validate, delete, archive
 - `/brain-task` — Task management: create, update, list, log, progress
 - `/brain-status` — Quick dashboard overview (runs in fork context)
 

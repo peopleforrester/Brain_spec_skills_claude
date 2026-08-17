@@ -140,3 +140,35 @@ test_brain_task_log_branches_on_working_tree() {
     assert_contains "$content" "HEAD~1..HEAD" \
         "brain-task log should reference HEAD~1..HEAD diff range for clean tree"
 }
+
+# --- Tests for EARS acceptance criteria (v1.2 modernization) ---
+
+test_spec_template_uses_ears() {
+    # The spec template's acceptance criteria should use EARS notation
+    # (WHEN <event> THE SYSTEM SHALL <behavior>), the requirements standard
+    # used by Kiro and referenced across the SDD field.
+    local content
+    content=$(cat "$SKILLS_DIR/brain-spec/SKILL.md")
+    assert_contains "$content" "THE SYSTEM SHALL" \
+        "spec template acceptance criteria should use EARS notation"
+    assert_contains "$content" "EARS" \
+        "brain-spec should reference EARS so the notation is explained"
+}
+
+# --- Tests for the validate/coverage gate (v1.2 modernization) ---
+
+test_brain_spec_has_validate_subcommand() {
+    local content
+    content=$(cat "$SKILLS_DIR/brain-spec/SKILL.md")
+    assert_contains "$content" 'Subcommand: `validate`' \
+        "brain-spec should document a validate subcommand"
+    assert_contains "$content" "validate" \
+        "brain-spec usage should list the validate subcommand"
+}
+
+test_brain_spec_argument_hint_lists_validate() {
+    local frontmatter
+    frontmatter=$(sed -n '2,/^---$/p' "$SKILLS_DIR/brain-spec/SKILL.md" | head -n -1)
+    assert_contains "$frontmatter" "validate" \
+        "brain-spec argument-hint should advertise the validate subcommand"
+}

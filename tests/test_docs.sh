@@ -196,6 +196,16 @@ test_readme_has_ci_badge() {
         "README should display the CI workflow badge"
 }
 
+test_readme_positions_against_field() {
+    # The README should honestly situate Brain Spec against the current
+    # spec-driven-development field rather than pretend it is alone.
+    local readme
+    readme=$(cat "$REPO_ROOT/README.md")
+    assert_contains "$readme" "Spec Kit" "README should reference GitHub Spec Kit"
+    assert_contains "$readme" "OpenSpec" "README should reference OpenSpec"
+    assert_contains "$readme" "Kiro" "README should reference Amazon Kiro"
+}
+
 test_contributing_exists() {
     assert_file_exists "$REPO_ROOT/CONTRIBUTING.md" "CONTRIBUTING.md should exist"
 }

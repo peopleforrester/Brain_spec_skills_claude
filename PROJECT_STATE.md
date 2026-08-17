@@ -1,6 +1,6 @@
 # PROJECT_STATE — Senior Review (April 2026) Remediation
 
-## Status: Phases A–E complete (shipped through v1.1.3)
+## Status: Phases A–F complete (shipped through v1.2.0)
 
 Two senior reviews have been executed. The first (March 2026) shipped as v1.1.0
 (see CHANGELOG). A follow-up review on 2026-04-24 found stale artifacts,
@@ -60,10 +60,26 @@ read source-of-truth files, not summary docs. CI not yet wired (Phase B).
 - Bash suite 72/72 local, shellcheck clean, checksums OK, both JSON manifests valid — all confirmed against source files.
 - **NOT yet verified:** live `/plugin install brain-spec-skills@brain-spec`. The marketplace + skills-path config follows the official Claude Code plugin docs (confirmed via claude-code-guide against current docs), but no end-to-end plugin install was run — this environment has no interactive `/plugin`. Run one live install before advertising the marketplace path.
 
+## Phase F — SDD modernization: keep + differentiate (2026-08-17, DONE)
+
+Decision driven by the competitive spike at
+`mrf-knowledge/spec-driven-development/2026-07-12_sdd-frameworks-vs-brain-spec.md`:
+keep as a portfolio piece, reposition honestly, borrow the highest-signal
+patterns; do NOT chase feature parity with Spec Kit.
+
+- [x] EARS acceptance criteria (`WHEN <event> THE SYSTEM SHALL <behavior>`) in the spec template + a reference block with the four EARS forms
+- [x] `brain-spec validate <slug>` read-only gate: completeness (TODO placeholders), EARS form, task coverage → pass/warn/fail verdict
+- [x] README "How Brain Spec compares" section positioning against Spec Kit / OpenSpec / Kiro; Spec Kit's Claude-Code-skills-mode claim verified against the live `github/spec-kit` integrations doc before publishing
+- [x] `validate` documented across usage list, argument-hint, description, README table, CLAUDE.md/AGENTS.md, SKILLS-REFERENCE
+- [x] Minor bump to `1.2.0` (new subcommand = backwards-compatible feature); checksums regenerated for the changed brain-spec SKILL.md
+
+Deferred (only if goal shifts from portfolio to real use): brownfield delta
+workflow (OpenSpec-style ADDED/MODIFIED/REMOVED) and subagent adversarial spec
+review.
+
 ## Branch / Test Status
 
-- Version: `1.1.3`
-- Branch: `staging` and `main` in sync after this lands (1.1.3)
-- Tests: 72/72 passing locally and shellcheck clean; CI re-verified after push
+- Version: `1.2.0`
+- Branch: `staging` and `main` in sync after this lands (1.2.0)
+- Tests: 76/76 passing locally and shellcheck clean; CI re-verified after push
 - Action pinned to SHA `9c091bb…` (v7.0.0, Node 24), `GITHUB_TOKEN` scoped `contents: read`
-- checkout v7's only behavioral change (blocking fork checkout for `pull_request_target`/`workflow_run`) does not touch our `push`/`pull_request` triggers

@@ -137,6 +137,17 @@ You'll be asked what to update:
 - **Content** -- edit the spec markdown
 - **Description** -- update the metadata description
 
+### /brain-spec validate \<slug\>
+
+Check a spec for completeness, EARS-formed acceptance criteria, and task coverage. Read-only; reports a pass/warn/fail verdict without editing anything.
+
+**Usage:**
+```
+/brain-spec validate user-auth-flow
+```
+
+Flags: unresolved `TODO:` placeholders in required sections, acceptance criteria that are not in EARS form (`WHEN <event> THE SYSTEM SHALL <behavior>`), and specs with no tasks covering them. Run it before breaking a spec into tasks or handing it off.
+
 ### /brain-spec delete \<slug\>
 
 Delete a spec and all associated tasks.
@@ -298,7 +309,7 @@ No arguments. Runs in a fork context (isolated from your main conversation) to k
 **Output:**
 ```
 ╔══════════════════════════════════════╗
-║    Brain Spec Dashboard v1.1.3       ║
+║    Brain Spec Dashboard v1.2.0       ║
 ╚══════════════════════════════════════╝
 
 Steering Documents
