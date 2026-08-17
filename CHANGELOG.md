@@ -2,6 +2,18 @@
 
 All notable changes to Brain Spec Skills are documented here.
 
+## [1.2.0] - 2026-08-17
+
+### Added
+- `brain-spec validate <slug>` subcommand: read-only completeness, EARS, and task-coverage check that reports a pass/warn/fail verdict before you build
+- EARS notation (`WHEN <event> THE SYSTEM SHALL <behavior>`) for acceptance criteria in the spec template, with a reference block and examples (event-driven, state-driven, unwanted-behavior, ubiquitous)
+- README "How Brain Spec compares" section positioning it honestly against GitHub Spec Kit, OpenSpec, and Amazon Kiro, and stating the deliberate niche (Claude Code-native, interview-first, zero-install)
+- Tests for EARS in the spec template, the validate subcommand, and the README comparison section
+
+### Changed
+- Documented `validate` across the brain-spec usage list, argument-hint, description, README skills table, CLAUDE.md, and SKILLS-REFERENCE
+- Regenerated `checksums.txt` for the updated brain-spec SKILL.md
+
 ## [1.1.3] - 2026-07-04
 
 ### Added

@@ -25,7 +25,7 @@ Fetching latest skills...
   Installed: brain-task
   Installed: brain-status
 
-Brain Spec Skills v1.1.3 installed (4 skills)
+Brain Spec Skills v1.2.0 installed (4 skills)
   Location: .claude/skills
 ```
 
@@ -206,7 +206,7 @@ Output:
 
 ```
 ╔══════════════════════════════════════╗
-║    Brain Spec Dashboard v1.1.3       ║
+║    Brain Spec Dashboard v1.2.0       ║
 ╚══════════════════════════════════════╝
 
 Steering Documents

@@ -1,7 +1,7 @@
 # Brain Spec Skills for Claude Code
 
 [![tests](https://github.com/peopleforrester/Brain_spec_skills_claude/actions/workflows/test.yml/badge.svg)](https://github.com/peopleforrester/Brain_spec_skills_claude/actions/workflows/test.yml)
-[![version](https://img.shields.io/badge/version-1.1.3-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-1.2.0-blue.svg)](CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 > Spec-driven development inside Claude Code. No server, no dependencies -- just 4 slash commands.
@@ -28,6 +28,18 @@ The skills use current Claude Code conventions: runtime version detection via `$
  config.json          specs/*.meta.json       tasks/*/logs/*.md     statistics
  steering/*.md
 ```
+
+## How Brain Spec compares
+
+Spec-driven development is a crowded field. GitHub Spec Kit, OpenSpec, and Amazon Kiro all cover the same core loop (structured spec, then plan, then tasks, then implement), and Spec Kit's Claude Code integration now installs as agent skills under `.claude/skills/`, the same form factor Brain Spec uses. Brain Spec does not try to out-feature them. It makes three deliberate choices:
+
+- **Claude Code-native, not agent-agnostic.** Spec Kit spreads across ~30 agents and lands on the lowest common denominator. Brain Spec leans into Claude Code specifics: skills, skill-scoped hooks, `${CLAUDE_SKILL_DIR}` runtime version detection, and plugin-marketplace install.
+- **Interview-first authoring.** `brain-spec create` runs a guided interview to build the spec with you, rather than handing you a blank template to fill in. It targets the blank-page problem directly.
+- **Zero-install.** Four markdown files. No Python CLI to `uv tool install`, no IDE. `curl` it or install it as a plugin.
+
+Acceptance criteria use [EARS notation](https://alistairmavin.com/ears/) (`WHEN <event> THE SYSTEM SHALL <behavior>`), the same testable-requirements convention Kiro adopted, and `brain-spec validate` checks a spec for completeness, EARS form, and task coverage before you build.
+
+If you want a large, agent-portable framework, use Spec Kit or OpenSpec. If you want a small, opinionated, Claude Code-native take you can read end to end, that is what this is.
 
 ## Installation
 
@@ -98,7 +110,7 @@ sha256sum -c /tmp/brain-spec-checksums.txt --ignore-missing
 | Skill | Command | Purpose |
 |-------|---------|---------|
 | **brain-init** | `/brain-init` | Initialize workspace, create steering docs, generate CLAUDE.md |
-| **brain-spec** | `/brain-spec <sub>` | Spec lifecycle: `create`, `interview`, `list`, `get`, `update`, `delete`, `archive` |
+| **brain-spec** | `/brain-spec <sub>` | Spec lifecycle: `create`, `interview`, `list`, `get`, `update`, `validate`, `delete`, `archive` |
 | **brain-task** | `/brain-task <sub>` | Task management: `create`, `update`, `list`, `log`, `progress` |
 | **brain-status** | `/brain-status` | Dashboard overview of all specs and tasks |
 
