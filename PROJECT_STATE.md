@@ -1,6 +1,6 @@
 # PROJECT_STATE — Senior Review (April 2026) Remediation
 
-## Status: Phases A–F complete (shipped through v1.2.0)
+## Status: Phases A–G complete (shipped through v1.2.1)
 
 Two senior reviews have been executed. The first (March 2026) shipped as v1.1.0
 (see CHANGELOG). A follow-up review on 2026-04-24 found stale artifacts,
@@ -77,9 +77,22 @@ Deferred (only if goal shifts from portfolio to real use): brownfield delta
 workflow (OpenSpec-style ADDED/MODIFIED/REMOVED) and subagent adversarial spec
 review.
 
+## Phase G — September 2026 currency sweep (2026-09-17, DONE)
+
+Verified against live sources, not memory:
+- [x] Claude Code conventions re-verified current (2026-09-17) via the live docs: SKILL.md frontmatter, `${CLAUDE_SKILL_DIR}`/`${CLAUDE_SESSION_ID}`, and plugin/marketplace schemas. The `plugin.json` `skills` field is typed `string|array`, so the array form in use is valid. No format changes required. A subagent claimed `skills` must be a string; that was checked against the live doc and is wrong.
+- [x] `actions/checkout` v7.0.0 → v7.0.1 (security hardening), SHA `3d3c42e5aac5ba805825da76410c181273ba90b1`
+- [x] Added `.github/dependabot.yml` (github-actions ecosystem) so action pins no longer drift silently; guarded by `test_dependabot_config_watches_actions`
+- [x] Fixed broken docs: PLUGIN-GUIDE pin/upgrade examples referenced v1.0.0; the repo had NO git tags at all, so the documented `--branch <tag>` / `install.sh --version <tag>` pinning could not resolve. Created `v1.2.1` (and backfilled `v1.2.0`) tags to make the feature real.
+- [x] Patch bump to `1.2.1` across VERSION files, plugin.json, README badge, doc banners, CHANGELOG
+
+Deferred (optional 2026 skill enhancements, not required for currency; Michael's call):
+frontmatter `model:`/`effort:`, plugin.json `displayName`/`userConfig`/`experimental.evals`, subagent skills (`context: fork`), `${CLAUDE_PLUGIN_DATA}` for persisted state. None are needed for compatibility.
+
 ## Branch / Test Status
 
-- Version: `1.2.0`
-- Branch: `staging` and `main` in sync after this lands (1.2.0)
-- Tests: 76/76 passing locally and shellcheck clean; CI re-verified after push
-- Action pinned to SHA `9c091bb…` (v7.0.0, Node 24), `GITHUB_TOKEN` scoped `contents: read`
+- Version: `1.2.1`
+- Branch: `staging` and `main` in sync after this lands (1.2.1)
+- Tests: 77/77 passing locally and shellcheck clean; CI re-verified after push
+- Action pinned to SHA `3d3c42e…` (v7.0.1, Node 24), `GITHUB_TOKEN` scoped `contents: read`
+- Release tags now exist so version pinning resolves; Dependabot watches github-actions going forward

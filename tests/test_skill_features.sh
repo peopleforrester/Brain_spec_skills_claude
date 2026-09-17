@@ -172,3 +172,18 @@ test_brain_spec_argument_hint_lists_validate() {
     assert_contains "$frontmatter" "validate" \
         "brain-spec argument-hint should advertise the validate subcommand"
 }
+
+# --- Tests for Dependabot version-update config ---
+
+test_dependabot_config_watches_actions() {
+    # A github-actions Dependabot config keeps the pinned CI action from drifting
+    # silently the way actions/checkout did between manual bumps.
+    local config="$REPO_ROOT/.github/dependabot.yml"
+    assert_file_exists "$config" "Dependabot config should exist at .github/dependabot.yml"
+    local content
+    content=$(cat "$config" 2>/dev/null || echo "")
+    assert_contains "$content" "github-actions" \
+        "Dependabot config should watch the github-actions ecosystem"
+    assert_contains "$content" "version: 2" \
+        "Dependabot config should declare version 2"
+}

@@ -85,14 +85,14 @@ Output for an update:
 
 ```
 Installing Brain Spec Skills to .claude/skills
-  Existing installation detected: v1.0.0
+  Existing installation detected: v1.2.0
 Fetching latest skills...
   Installed: brain-init
   Installed: brain-spec
   Installed: brain-task
   Installed: brain-status
 
-Brain Spec Skills updated: v1.0.0 -> v1.1.0 (4 skills)
+Brain Spec Skills updated: v1.2.0 -> v1.2.1 (4 skills)
 ```
 
 ### Pinning a Version
@@ -100,7 +100,7 @@ Brain Spec Skills updated: v1.0.0 -> v1.1.0 (4 skills)
 To pin a specific version, clone the repo at a tag:
 
 ```bash
-git clone --depth 1 --branch v1.0.0 https://github.com/peopleforrester/Brain_spec_skills_claude.git /tmp/brain-spec
+git clone --depth 1 --branch v1.2.1 https://github.com/peopleforrester/Brain_spec_skills_claude.git /tmp/brain-spec
 cp -r /tmp/brain-spec/.claude/skills/brain-* .claude/skills/
 rm -rf /tmp/brain-spec
 ```
