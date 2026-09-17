@@ -309,7 +309,7 @@ No arguments. Runs in a fork context (isolated from your main conversation) to k
 **Output:**
 ```
 ╔══════════════════════════════════════╗
-║    Brain Spec Dashboard v1.2.0       ║
+║    Brain Spec Dashboard v1.2.1       ║
 ╚══════════════════════════════════════╝
 
 Steering Documents

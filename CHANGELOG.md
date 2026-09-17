@@ -2,6 +2,19 @@
 
 All notable changes to Brain Spec Skills are documented here.
 
+## [1.2.1] - 2026-09-17
+
+### Added
+- `.github/dependabot.yml` watching the `github-actions` ecosystem, so pinned CI action SHAs no longer drift silently between manual bumps
+- Release tags (`v1.2.1`, backfilled `v1.2.0`) so the documented version pinning (`git clone --branch <tag>` and `install.sh --version <tag>`) actually resolves
+
+### Changed
+- CI: bumped `actions/checkout` from v7.0.0 to v7.0.1 (security hardening: skip unsafe PR check on default input, ASCII-only branch trim, escaped `--unset` values), pinned to full SHA
+- Fixed stale version examples in the plugin guide (upgrade output and the version-pin clone command referenced the long-superseded v1.0.0)
+
+### Verified
+- Claude Code conventions confirmed current as of 2026-09-17 against the live docs: SKILL.md frontmatter (`allowed-tools`, `hooks`), variable substitution (`${CLAUDE_SKILL_DIR}`, `${CLAUDE_SESSION_ID}`), and the `plugin.json` / `marketplace.json` schemas (the `skills` field accepts the array form in use). No format changes were required.
+
 ## [1.2.0] - 2026-08-17
 
 ### Added
