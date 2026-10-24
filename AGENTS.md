@@ -34,3 +34,5 @@ Skills operate on `.brain-spec/` in the target project:
 - Write access constrained to `.brain-spec/` and `CLAUDE.md` only
 - Git operations are read-only (auto-enrichment for logs)
 - Interview state persists in .meta.json, resumable across sessions
+
+Test command: `bash tests/run-tests.sh && sha256sum -c checksums.txt && shellcheck --severity=warning install.sh tests/run-tests.sh`
